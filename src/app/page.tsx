@@ -57,10 +57,41 @@ export default function HomePage() {
               </svg>
               Speed · Style · Stock
             </div>
-            <h1 className="font-display text-5xl md:text-7xl leading-[0.95] text-white drop-shadow-[0_0_20px_rgba(168,85,247,0.45)]">
-              СТОК<br />
-              <span className="cosmos-text">З ЄВРОПИ.</span><br />
-              У ЦІЙ ГАЛАКТИЦІ.
+            <h1
+              className="font-display font-extrabold tracking-tight text-white"
+              style={{
+                WebkitTextStroke: "2px #ff2d2d",
+                paintOrder: "stroke fill",
+                textShadow:
+                  "0 0 24px rgba(255,45,45,0.45), 0 2px 0 rgba(0,0,0,0.45)",
+              }}
+            >
+              <span className="block text-6xl sm:text-7xl md:text-8xl leading-[0.9]">
+                ЄВРО
+              </span>
+              <span className="block text-6xl sm:text-7xl md:text-8xl leading-[0.9]">
+                МІКС
+              </span>
+              <span
+                className="block my-3 h-[3px] w-28 bg-brand-500"
+                style={{ boxShadow: "0 0 18px #ff2d2d" }}
+                aria-hidden
+              />
+              <span
+                className="block font-display text-2xl sm:text-3xl md:text-4xl leading-tight text-white"
+                style={{
+                  WebkitTextStroke: "0px transparent",
+                  textShadow: "0 0 14px rgba(255,45,45,0.35)",
+                }}
+              >
+                взуття · одяг · та<br />
+                аксесуари з Европи
+              </span>
+              <span
+                className="block mt-3 h-[3px] w-28 bg-brand-500"
+                style={{ boxShadow: "0 0 18px #ff2d2d" }}
+                aria-hidden
+              />
             </h1>
             <p className="mt-5 text-cosmos-mute max-w-md">
               Оригінальні бренди — Zara, H&M, Reserved, Bershka, Nike, Adidas. Жіночий,
