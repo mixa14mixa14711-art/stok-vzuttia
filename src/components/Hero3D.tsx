@@ -20,26 +20,26 @@ export default function Hero3D() {
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
     renderer.setSize(width, height);
-    renderer.setClearColor(0x04051a, 1);
+    renderer.setClearColor(0x000000, 1);
     mount.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x0a0b2e, 0.07);
+    scene.fog = new THREE.FogExp2(0x000000, 0.075);
 
     const camera = new THREE.PerspectiveCamera(52, width / height, 0.1, 200);
     camera.position.set(0, 0.6, 8);
 
-    // --- Lights: soft ambient + magenta + cyan key lights for a nebula-lit feel
-    scene.add(new THREE.AmbientLight(0x4b2c7a, 0.55));
-    const magenta = new THREE.PointLight(0xd946ef, 2.0, 40);
-    magenta.position.set(6, 3, -2);
-    scene.add(magenta);
-    const cyan = new THREE.PointLight(0x22d3ee, 1.6, 40);
-    cyan.position.set(-6, -2, -4);
-    scene.add(cyan);
-    const violet = new THREE.PointLight(0x7c3aed, 1.4, 40);
-    violet.position.set(0, 6, 4);
-    scene.add(violet);
+    // --- Lights: dim ambient + cyan + gold + white key lights (black-space feel)
+    scene.add(new THREE.AmbientLight(0x0b1320, 0.45));
+    const cyanL = new THREE.PointLight(0x22d3ee, 2.0, 40);
+    cyanL.position.set(6, 3, -2);
+    scene.add(cyanL);
+    const goldL = new THREE.PointLight(0xfbbf24, 1.3, 40);
+    goldL.position.set(-6, -2, -4);
+    scene.add(goldL);
+    const whiteL = new THREE.PointLight(0xffffff, 1.0, 40);
+    whiteL.position.set(0, 6, 4);
+    scene.add(whiteL);
 
     // --- STARFIELD: thousands of Points
     const starGeo = new THREE.BufferGeometry();
@@ -48,9 +48,9 @@ export default function Hero3D() {
     const colors = new Float32Array(starCount * 3);
     const palette = [
       new THREE.Color(0xffffff),
-      new THREE.Color(0xa855f7),
+      new THREE.Color(0xf1f3f8),
       new THREE.Color(0x22d3ee),
-      new THREE.Color(0xec4899),
+      new THREE.Color(0x67e8f9),
       new THREE.Color(0xfbbf24),
     ];
     for (let i = 0; i < starCount; i++) {
@@ -79,15 +79,15 @@ export default function Hero3D() {
     const stars = new THREE.Points(starGeo, starMat);
     scene.add(stars);
 
-    // --- PLANET (central)
+    // --- PLANET (central) — black metal with subtle cyan atmosphere
     const planet = new THREE.Mesh(
       new THREE.IcosahedronGeometry(1.4, 4),
       new THREE.MeshStandardMaterial({
-        color: 0x2a2d5e,
-        metalness: 0.3,
-        roughness: 0.55,
-        emissive: 0x4c1d95,
-        emissiveIntensity: 0.45,
+        color: 0x0a0a10,
+        metalness: 0.75,
+        roughness: 0.35,
+        emissive: 0x0e4c5a,
+        emissiveIntensity: 0.35,
       })
     );
     planet.position.set(0, 0.2, 0);
@@ -97,7 +97,7 @@ export default function Hero3D() {
     const atmosphere = new THREE.Mesh(
       new THREE.SphereGeometry(1.6, 48, 48),
       new THREE.MeshBasicMaterial({
-        color: 0xa855f7,
+        color: 0x22d3ee,
         transparent: true,
         opacity: 0.12,
         blending: THREE.AdditiveBlending,
@@ -111,9 +111,9 @@ export default function Hero3D() {
     const ring1 = new THREE.Mesh(
       new THREE.TorusGeometry(2.6, 0.04, 3, 160),
       new THREE.MeshBasicMaterial({
-        color: 0xd946ef,
+        color: 0x22d3ee,
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.85,
         blending: THREE.AdditiveBlending,
       })
     );
@@ -124,9 +124,9 @@ export default function Hero3D() {
     const ring2 = new THREE.Mesh(
       new THREE.TorusGeometry(3.0, 0.03, 3, 160),
       new THREE.MeshBasicMaterial({
-        color: 0x22d3ee,
+        color: 0xfbbf24,
         transparent: true,
-        opacity: 0.6,
+        opacity: 0.55,
         blending: THREE.AdditiveBlending,
       })
     );
@@ -138,7 +138,7 @@ export default function Hero3D() {
     // --- ORBITING SATELLITES (small glowing shapes)
     const satellites = new THREE.Group();
     const satMeta: { mesh: THREE.Mesh; radius: number; speed: number; phase: number; tiltY: number }[] = [];
-    const satColors = [0xa855f7, 0xd946ef, 0x22d3ee, 0xec4899, 0xfbbf24];
+    const satColors = [0x22d3ee, 0x67e8f9, 0xfbbf24, 0xffffff, 0xd4ff00];
     for (let i = 0; i < 10; i++) {
       const kind = i % 3;
       const geom =

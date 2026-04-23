@@ -92,6 +92,22 @@ export function Footer() {
               </a>
             </li>
             <li className="text-cosmos-mute/70 text-xs pt-1">{SHOP_INFO.workHours}</li>
+            <li className="pt-2 border-t border-cosmos-line/60 mt-2">
+              <div className="text-cosmos-mute text-xs uppercase tracking-widest">Магазин (офлайн)</div>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                  SHOP_INFO.store.mapQuery
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-cosmos-ink hover:text-cosmos-aqua"
+              >
+                {SHOP_INFO.store.address},
+                <br />
+                {SHOP_INFO.store.city}
+              </a>
+              <div className="text-cosmos-mute/80 text-xs mt-0.5">{SHOP_INFO.store.hours}</div>
+            </li>
           </ul>
         </div>
       </div>

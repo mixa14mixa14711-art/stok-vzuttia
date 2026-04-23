@@ -7,6 +7,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { FeaturesStrip } from "@/components/FeaturesStrip";
 import { VideosSection } from "@/components/VideosSection";
 import { TelegramStrip } from "@/components/TelegramStrip";
+import { StoreSection } from "@/components/StoreSection";
 
 const Hero3D = dynamic(() => import("@/components/Hero3D"), {
   ssr: false,
@@ -181,6 +182,9 @@ export default function HomePage() {
 
       {/* VIDEOS — TikTok live clips grid */}
       <VideosSection />
+
+      {/* STORE — offline shop with map */}
+      <StoreSection />
 
       {/* TELEGRAM / TIKTOK subscribe strip */}
       <TelegramStrip />
