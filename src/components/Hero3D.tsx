@@ -95,8 +95,8 @@ export default function Hero3D() {
 
     const tick = () => {
       if (disposed) return;
-      const t = clock.getElapsedTime();
       const dt = clock.getDelta();
+      const t = clock.elapsedTime;
 
       knot.rotation.x += dt * 0.2;
       knot.rotation.y += dt * 0.35;

@@ -26,7 +26,7 @@ const MARQUEE = [
 
 export default function HomePage() {
   const featured = PRODUCTS.filter((p) => p.badge).slice(0, 8);
-  const newArrivals = PRODUCTS.slice(0, 8);
+  const newArrivals = PRODUCTS.slice().reverse().slice(0, 8);
 
   return (
     <div>
