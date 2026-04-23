@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { PRODUCTS, DEPARTMENTS } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
 import { SHOP_INFO } from "@/lib/shop-info";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 const Hero3D = dynamic(() => import("@/components/Hero3D"), {
   ssr: false,
@@ -33,7 +34,9 @@ export default function HomePage() {
       <section className="relative overflow-hidden sport-bg noise clip-slant">
         <div className="absolute inset-0 sport-grid opacity-40" />
         <div className="absolute inset-0">
-          <Hero3D />
+          <ErrorBoundary fallback={null}>
+            <Hero3D />
+          </ErrorBoundary>
         </div>
         <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-28">
           <div className="max-w-xl">
