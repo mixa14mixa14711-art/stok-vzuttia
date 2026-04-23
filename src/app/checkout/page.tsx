@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/CartProvider";
+import { useGeo } from "@/components/GeoProvider";
 import { formatUAH } from "@/lib/products";
 import Link from "next/link";
 
 export default function CheckoutPage() {
   const { items, total, clear } = useCart();
   const router = useRouter();
+  const geo = useGeo();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,6 +23,12 @@ export default function CheckoutPage() {
     payment: "np-cod",
     comment: "",
   });
+
+  useEffect(() => {
+    if (geo.status === "granted" && geo.city && !form.city) {
+      setForm((f) => ({ ...f, city: geo.city as string }));
+    }
+  }, [geo.status, geo.city, form.city]);
 
   const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -99,7 +107,22 @@ export default function CheckoutPage() {
           </div>
 
           <div>
-            <h2 className="font-semibold mb-3">Доставка — Нова Пошта</h2>
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="font-semibold">Доставка — Нова Пошта</h2>
+              {geo.status !== "granted" ? (
+                <button
+                  type="button"
+                  onClick={geo.request}
+                  className="text-xs text-brand-600 hover:underline"
+                >
+                  Визначити моє місто автоматично
+                </button>
+              ) : geo.city ? (
+                <span className="text-xs text-neutral-500">
+                  За геолокацією: <b className="text-neutral-800">{geo.city}</b>
+                </span>
+              ) : null}
+            </div>
             <div className="grid sm:grid-cols-2 gap-3">
               <Field label="Місто" required>
                 <input required value={form.city} onChange={update("city")} placeholder="Київ" className={inputCls} />

@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
+import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/components/CartProvider";
+import { GeoProvider } from "@/components/GeoProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { getCurrentUser } from "@/lib/auth";
 import { SHOP_INFO } from "@/lib/shop-info";
+
+const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-sans", display: "swap" });
+const display = Oswald({ subsets: ["latin", "cyrillic"], weight: ["500", "700"], variable: "--font-display", display: "swap" });
 
 export const metadata: Metadata = {
   title: `${SHOP_INFO.name} — ${SHOP_INFO.tagline}`,
@@ -15,13 +20,15 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const user = await getCurrentUser();
   return (
-    <html lang="uk">
+    <html lang="uk" className={`${inter.variable} ${display.variable}`}>
       <body>
-        <CartProvider>
-          <Header user={user ? { email: user.email, name: user.name } : null} />
-          <main className="min-h-[70vh]">{children}</main>
-          <Footer />
-        </CartProvider>
+        <GeoProvider>
+          <CartProvider>
+            <Header user={user ? { email: user.email, name: user.name } : null} />
+            <main className="min-h-[70vh]">{children}</main>
+            <Footer />
+          </CartProvider>
+        </GeoProvider>
       </body>
     </html>
   );
