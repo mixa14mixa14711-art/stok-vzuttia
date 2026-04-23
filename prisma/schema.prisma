@@ -44,3 +44,14 @@ model OrderItem {
   price     Int
   quantity  Int
 }
+
+model CallbackRequest {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  topic     String?
+  comment   String?
+  source    String?
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+}

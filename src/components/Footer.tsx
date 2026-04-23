@@ -25,6 +25,7 @@ export function Footer() {
             <li><Link href="/wholesale" className="hover:text-cosmos-fuchsia">Опт / Великий гурт</Link></li>
             <li><Link href="/offer" className="hover:text-cosmos-fuchsia">Публічна оферта</Link></li>
             <li><Link href="/privacy" className="hover:text-cosmos-fuchsia">Політика конфіденційності</Link></li>
+            <li><Link href="/faq" className="hover:text-cosmos-fuchsia">Часті питання (FAQ)</Link></li>
             <li><Link href="/sitemap-page" className="hover:text-cosmos-fuchsia">Мапа сайту</Link></li>
           </ul>
         </div>

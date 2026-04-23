@@ -5,6 +5,7 @@ import { CartProvider } from "@/components/CartProvider";
 import { GeoProvider } from "@/components/GeoProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { CallbackFab } from "@/components/CallbackFab";
 import { getCurrentUser } from "@/lib/auth";
 import { SHOP_INFO } from "@/lib/shop-info";
 
@@ -27,6 +28,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <Header user={user ? { email: user.email, name: user.name } : null} />
             <main className="min-h-[70vh]">{children}</main>
             <Footer />
+            <CallbackFab />
           </CartProvider>
         </GeoProvider>
       </body>

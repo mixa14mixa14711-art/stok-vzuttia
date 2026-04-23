@@ -154,6 +154,7 @@ export function Header({ user }: Props) {
               <Link href="/reviews" onClick={() => setOpen(false)} className="py-1">Відгуки</Link>
               <Link href="/delivery" onClick={() => setOpen(false)} className="py-1">Доставка і оплата</Link>
               <Link href="/returns" onClick={() => setOpen(false)} className="py-1">Обмін та повернення</Link>
+              <Link href="/faq" onClick={() => setOpen(false)} className="py-1">FAQ</Link>
               <Link href="/contacts" onClick={() => setOpen(false)} className="py-1">Контакти</Link>
               {!user && (
                 <div className="flex gap-3 pt-2 border-t border-cosmos-line">

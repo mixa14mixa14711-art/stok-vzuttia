@@ -51,6 +51,16 @@ async function bootstrapSchema(client: PrismaClient) {
     "quantity" INTEGER NOT NULL,
     CONSTRAINT "OrderItem_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "Order"("id") ON DELETE CASCADE
   )`);
+  await client.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "CallbackRequest" (
+    "id" TEXT PRIMARY KEY NOT NULL,
+    "name" TEXT NOT NULL,
+    "phone" TEXT NOT NULL,
+    "topic" TEXT,
+    "comment" TEXT,
+    "source" TEXT,
+    "status" TEXT NOT NULL DEFAULT 'new',
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+  )`);
 }
 
 let bootstrapPromise: Promise<void> | null = null;

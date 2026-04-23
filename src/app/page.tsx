@@ -4,6 +4,9 @@ import { PRODUCTS, DEPARTMENTS } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
 import { SHOP_INFO } from "@/lib/shop-info";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { FeaturesStrip } from "@/components/FeaturesStrip";
+import { VideosSection } from "@/components/VideosSection";
+import { TelegramStrip } from "@/components/TelegramStrip";
 
 const Hero3D = dynamic(() => import("@/components/Hero3D"), {
   ssr: false,
@@ -43,9 +46,15 @@ export default function HomePage() {
         </div>
         <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-28">
           <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-cosmos-aqua mb-4">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-cosmos-aqua mb-3">
               <span className="w-8 h-px bg-cosmos-aqua" />
               {SHOP_INFO.source}
+            </div>
+            <div className="inline-flex items-center gap-2 mb-4 rounded-full border border-sport-lime/60 bg-sport-lime/10 px-3 py-1 text-[11px] uppercase tracking-[0.25em] text-sport-lime shadow-[0_0_28px_-4px_rgba(212,255,0,0.55)]">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />
+              </svg>
+              Speed · Style · Stock
             </div>
             <h1 className="font-display text-5xl md:text-7xl leading-[0.95] text-white drop-shadow-[0_0_20px_rgba(168,85,247,0.45)]">
               СТОК<br />
@@ -166,6 +175,15 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* FEATURES — "Why Nata Stok" 6-tile strip */}
+      <FeaturesStrip />
+
+      {/* VIDEOS — TikTok live clips grid */}
+      <VideosSection />
+
+      {/* TELEGRAM / TIKTOK subscribe strip */}
+      <TelegramStrip />
 
       {/* BENEFITS — cosmic glass cards */}
       <section className="mx-auto max-w-6xl px-4 py-12">
