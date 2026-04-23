@@ -46,9 +46,9 @@ export default function ContactsPage() {
 
 function Card({ title, value, href }: { title: string; value: string; href?: string }) {
   const Inner = (
-    <div className="border border-neutral-200 rounded-lg bg-white p-5 hover:border-brand-400 transition-colors">
+    <div className="border border-neutral-200 rounded-lg bg-white p-5 hover:border-sport-blue transition-colors">
       <div className="text-xs uppercase text-neutral-500 tracking-wide">{title}</div>
-      <div className="mt-1 font-medium">{value}</div>
+      <div className="mt-1 font-display text-xl text-sport-blueDeep">{value}</div>
     </div>
   );
   return href ? (

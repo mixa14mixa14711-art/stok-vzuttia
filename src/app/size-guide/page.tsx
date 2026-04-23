@@ -60,97 +60,114 @@ export default function SizeGuidePage() {
     <div className="bg-sport-bg text-sport-ink min-h-screen">
       <div className="mx-auto max-w-6xl px-4 py-10 md:py-14">
         <div className="mb-8">
-          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-sport-lime mb-3">
-            <span className="w-8 h-px bg-sport-lime" /> Онлайн-калькулятор
+          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-sport-blue mb-3">
+            <span className="w-8 h-px bg-sport-blue" /> Онлайн-калькулятор
           </div>
           <h1 className="font-display text-4xl md:text-5xl uppercase tracking-wide">
             Таблиця <span className="text-sport-red">розмірів</span>
           </h1>
           <p className="text-sport-mute mt-3 max-w-2xl">
-            Виберіть категорію і введіть ваші заміри в сантиметрах. Система підбере відповідник
-            у європейській (EU), українській (UA) та американській (US) системах.
+            Введіть заміри в сантиметрах — і одразу отримаєте розмір у системах EU / UA / US. Деталі
+            по кожній категорії — у розділах ліворуч (натисніть, щоб розгорнути).
           </p>
         </div>
 
-        <SizeCalculator />
+        <div className="grid lg:grid-cols-[1fr_420px] gap-8 items-start">
+          {/* LEFT — collapsible tables */}
+          <div className="space-y-3">
+            <Accordion title="Жіночий одяг">
+              <TableBlock
+                head={["Розмір", "EU", "UA", "Груди, см", "Талія, см", "Стегна, см"]}
+                rows={womenClothes}
+              />
+            </Accordion>
+            <Accordion title="Чоловічий одяг">
+              <TableBlock
+                head={["Розмір", "EU/UA", "US", "Груди, см", "Талія, см"]}
+                rows={menClothes}
+              />
+            </Accordion>
+            <Accordion title="Дитячий одяг">
+              <TableBlock
+                head={["Зріст (розмір)", "Вік", "Груди, см", "Талія, см"]}
+                rows={kidsTable}
+              />
+            </Accordion>
+            <Accordion title="Взуття">
+              <TableBlock head={["Ступня, см", "EU", "UK", "US"]} rows={shoesTable} />
+            </Accordion>
+            <Accordion title="Як зняти заміри">
+              <ul className="text-sport-mute space-y-2 list-disc pl-5 text-sm md:text-base">
+                <li>
+                  <b className="text-sport-ink">Груди</b> — горизонтально, по найвищих точках, сантиметр
+                  не перетягувати.
+                </li>
+                <li>
+                  <b className="text-sport-ink">Талія</b> — у найвужчому місці.
+                </li>
+                <li>
+                  <b className="text-sport-ink">Стегна</b> — по найширших точках.
+                </li>
+                <li>
+                  <b className="text-sport-ink">Ступня</b> — стати на аркуш, обвести, виміряти від
+                  п&apos;яти до великого пальця. Знімайте ввечері — нога трохи більша.
+                </li>
+              </ul>
+            </Accordion>
 
-        <section className="mt-12">
-          <h2 className="font-display text-2xl uppercase tracking-wide mb-4">Жіночий одяг</h2>
-          <TableBlock
-            head={["Розмір", "EU", "UA", "Груди, см", "Талія, см", "Стегна, см"]}
-            rows={womenClothes}
-          />
-        </section>
-
-        <section className="mt-10">
-          <h2 className="font-display text-2xl uppercase tracking-wide mb-4">Чоловічий одяг</h2>
-          <TableBlock
-            head={["Розмір", "EU/UA", "US", "Груди, см", "Талія, см"]}
-            rows={menClothes}
-          />
-        </section>
-
-        <section className="mt-10">
-          <h2 className="font-display text-2xl uppercase tracking-wide mb-4">Дитячий одяг</h2>
-          <TableBlock
-            head={["Зріст (розмір)", "Вік", "Груди, см", "Талія, см"]}
-            rows={kidsTable}
-          />
-        </section>
-
-        <section className="mt-10">
-          <h2 className="font-display text-2xl uppercase tracking-wide mb-4">Взуття</h2>
-          <TableBlock
-            head={["Ступня, см", "EU", "UK", "US"]}
-            rows={shoesTable}
-          />
-        </section>
-
-        <div className="mt-12 rounded-xl border border-sport-line bg-sport-surface p-5 md:p-7">
-          <h3 className="font-display text-xl uppercase tracking-wide mb-2">Як зняти заміри</h3>
-          <ul className="text-sport-mute space-y-2 list-disc pl-5 text-sm md:text-base">
-            <li>
-              <b className="text-sport-ink">Груди</b> — горизонтально, по найвищих точках, сантиметр не перетягувати.
-            </li>
-            <li>
-              <b className="text-sport-ink">Талія</b> — у найвужчому місці.
-            </li>
-            <li>
-              <b className="text-sport-ink">Стегна</b> — по найширших точках.
-            </li>
-            <li>
-              <b className="text-sport-ink">Ступня</b> — стати на аркуш, обвести, виміряти від п&apos;яти до великого пальця.
-              Знімайте ввечері — нога трохи більша.
-            </li>
-          </ul>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <Link
-              href="/catalog/women"
-              className="inline-flex items-center rounded bg-sport-lime text-sport-bg font-bold uppercase tracking-wide px-5 py-2.5 hover:brightness-110"
-            >
-              Обрати розмір у каталозі
-            </Link>
-            <Link
-              href="/contacts"
-              className="inline-flex items-center rounded border border-sport-line text-sport-ink px-5 py-2.5 hover:border-sport-lime"
-            >
-              Допомога з вибором
-            </Link>
+            <div className="pt-2 flex flex-wrap gap-3">
+              <Link
+                href="/catalog/women"
+                className="inline-flex items-center rounded bg-sport-blue text-sport-bg font-bold uppercase tracking-wide px-5 py-2.5 hover:brightness-110"
+              >
+                Обрати розмір у каталозі
+              </Link>
+              <Link
+                href="/contacts"
+                className="inline-flex items-center rounded border border-sport-line text-sport-ink px-5 py-2.5 hover:border-sport-blue"
+              >
+                Допомога з вибором
+              </Link>
+            </div>
           </div>
+
+          {/* RIGHT — sticky calculator */}
+          <aside className="lg:sticky lg:top-24">
+            <SizeCalculator />
+          </aside>
         </div>
       </div>
     </div>
   );
 }
 
+function Accordion({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <details className="group rounded-xl border border-sport-line bg-sport-surface overflow-hidden">
+      <summary className="list-none cursor-pointer select-none flex items-center justify-between px-5 py-4 hover:bg-sport-bg/60 transition-colors">
+        <span className="font-display text-lg md:text-xl uppercase tracking-wide">{title}</span>
+        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-sport-line text-sport-blue transition-transform group-open:rotate-45">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+        </span>
+      </summary>
+      <div className="px-5 pb-5 pt-1 border-t border-sport-line/70">{children}</div>
+    </details>
+  );
+}
+
 function TableBlock({ head, rows }: { head: string[]; rows: string[][] }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-sport-line">
-      <table className="min-w-[640px] w-full text-sm md:text-base">
+    <div className="overflow-x-auto rounded-lg border border-sport-line">
+      <table className="min-w-[560px] w-full text-sm md:text-base">
         <thead>
-          <tr className="bg-sport-surface">
+          <tr className="bg-sport-bg">
             {head.map((h) => (
-              <th key={h} className="px-4 py-3 text-left font-display uppercase tracking-wide text-sport-lime border-b border-sport-line">
+              <th
+                key={h}
+                className="px-4 py-3 text-left font-display uppercase tracking-wide text-sport-blue border-b border-sport-line"
+              >
                 {h}
               </th>
             ))}
@@ -158,7 +175,7 @@ function TableBlock({ head, rows }: { head: string[]; rows: string[][] }) {
         </thead>
         <tbody>
           {rows.map((r, i) => (
-            <tr key={i} className={i % 2 ? "bg-sport-bg" : "bg-sport-surface/60"}>
+            <tr key={i} className={i % 2 ? "bg-sport-bg/40" : ""}>
               {r.map((c, j) => (
                 <td key={j} className="px-4 py-2.5 border-b border-sport-line/60 text-sport-ink">
                   {c}

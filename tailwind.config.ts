@@ -27,6 +27,8 @@ const config: Config = {
           fire: "#ff6a1a",
           lime: "#d4ff00",
           cyan: "#00e5ff",
+          blue: "#38bdf8",
+          blueDeep: "#0ea5e9",
         },
       },
       fontFamily: {
@@ -36,6 +38,7 @@ const config: Config = {
       boxShadow: {
         glow: "0 0 40px -5px rgba(255,45,45,0.45)",
         limeGlow: "0 0 40px -5px rgba(212,255,0,0.45)",
+        blueGlow: "0 0 40px -5px rgba(56,189,248,0.45)",
       },
       keyframes: {
         marquee: {

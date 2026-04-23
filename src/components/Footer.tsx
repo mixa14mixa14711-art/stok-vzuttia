@@ -36,44 +36,47 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <div className="font-display text-lg text-sport-lime mb-3 uppercase tracking-widest">Контакти</div>
+          <div className="font-display text-lg text-sport-blue mb-3 uppercase tracking-widest">Контакти</div>
           <ul className="space-y-1.5 text-sport-ink/80">
             <li>
-              <a href={`tel:${SHOP_INFO.phoneDigits}`} className="hover:text-sport-lime">
+              <a
+                href={`tel:${SHOP_INFO.phoneDigits}`}
+                className="text-sport-blue font-display text-xl tracking-wide hover:text-white"
+              >
                 {SHOP_INFO.phone}
               </a>
             </li>
             <li>
               <a
                 href={`viber://chat?number=${SHOP_INFO.viber}`}
-                className="hover:text-sport-lime"
+                className="text-sport-blue hover:text-white"
               >
                 Viber: {SHOP_INFO.phone}
               </a>
             </li>
             <li>
-              <a href={`mailto:${SHOP_INFO.email}`} className="hover:text-sport-lime">
+              <a href={`mailto:${SHOP_INFO.email}`} className="text-sport-blue hover:text-white">
                 {SHOP_INFO.email}
               </a>
             </li>
             <li>
-              Telegram:{" "}
+              <span className="text-sport-mute">Telegram:</span>{" "}
               <a
                 href={`https://t.me/${SHOP_INFO.telegram.replace("@", "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-sport-lime"
+                className="text-sport-blue hover:text-white"
               >
                 {SHOP_INFO.telegram}
               </a>
             </li>
             <li>
-              TikTok:{" "}
+              <span className="text-sport-mute">TikTok:</span>{" "}
               <a
                 href={SHOP_INFO.tiktokUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-sport-lime"
+                className="text-sport-blue hover:text-white"
               >
                 {SHOP_INFO.tiktok}
               </a>

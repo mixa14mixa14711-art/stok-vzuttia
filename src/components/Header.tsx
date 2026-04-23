@@ -23,7 +23,7 @@ export function Header({ user }: Props) {
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <a
               href={`tel:${SHOP_INFO.phoneDigits}`}
-              className="group inline-flex items-center gap-2 font-display text-lg md:text-xl font-bold tracking-wide text-sport-lime hover:text-white transition-colors"
+              className="group inline-flex items-center gap-2 font-display text-lg md:text-xl font-bold tracking-wide text-sport-blue hover:text-white transition-colors"
               aria-label={`Телефонувати ${SHOP_INFO.phone}`}
             >
               <svg
@@ -32,7 +32,7 @@ export function Header({ user }: Props) {
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 aria-hidden
-                className="drop-shadow-[0_0_8px_rgba(212,255,0,0.55)]"
+                className="drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]"
               >
                 <path d="M6.6 10.8c1.5 2.9 3.9 5.3 6.8 6.8l2.3-2.3c.3-.3.7-.4 1.1-.3 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1.1L6.6 10.8z"/>
               </svg>
@@ -40,7 +40,7 @@ export function Header({ user }: Props) {
             </a>
             <a
               href={`viber://chat?number=${SHOP_INFO.viber}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-sport-lime/60 px-3 py-1 text-xs md:text-sm font-semibold text-sport-lime hover:bg-sport-lime hover:text-sport-bg transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full border border-sport-blue/60 px-3 py-1 text-xs md:text-sm font-semibold text-sport-blue hover:bg-sport-blue hover:text-sport-bg transition-colors"
               aria-label="Viber"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -52,7 +52,7 @@ export function Header({ user }: Props) {
               href={SHOP_INFO.tiktokUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-sport-cyan/60 px-3 py-1 text-xs md:text-sm font-semibold text-sport-cyan hover:bg-sport-cyan hover:text-sport-bg transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full border border-sport-blue/60 px-3 py-1 text-xs md:text-sm font-semibold text-sport-blue hover:bg-sport-blue hover:text-sport-bg transition-colors"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                 <path d="M19.5 7.8c-1.8 0-3.3-1.4-3.3-3.2V4h-3.1v12.4c0 1.2-1 2.2-2.2 2.2a2.2 2.2 0 1 1 0-4.4c.2 0 .4 0 .6.1V11a5.3 5.3 0 1 0 4.7 5.3V9.6c1 .7 2.2 1.1 3.5 1.1V7.8h-.2z"/>

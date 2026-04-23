@@ -124,7 +124,7 @@ export default function SizeCalculator() {
       const r = findRow(womenTops, "chest", n);
       return r && (
         <>
-          EU <b className="text-sport-lime">{r.eu}</b> · UA {r.ua} · US {r.us} · {r.intl}
+          EU <b className="text-sport-blue">{r.eu}</b> · UA {r.ua} · US {r.us} · {r.intl}
         </>
       );
     }
@@ -134,7 +134,7 @@ export default function SizeCalculator() {
       const r = findRow(womenBottoms, "waist", n);
       return r && (
         <>
-          EU <b className="text-sport-lime">{r.eu}</b> · UA {r.ua} · US {r.us} · {r.intl}
+          EU <b className="text-sport-blue">{r.eu}</b> · UA {r.ua} · US {r.us} · {r.intl}
         </>
       );
     }
@@ -144,7 +144,7 @@ export default function SizeCalculator() {
       const r = findRow(menTops, "chest", n);
       return r && (
         <>
-          EU/UA <b className="text-sport-lime">{r.eu}</b> · US {r.us} · {r.intl}
+          EU/UA <b className="text-sport-blue">{r.eu}</b> · US {r.us} · {r.intl}
         </>
       );
     }
@@ -154,7 +154,7 @@ export default function SizeCalculator() {
       const r = findRow(menBottoms, "waist", n);
       return r && (
         <>
-          EU <b className="text-sport-lime">{r.eu}</b> · US {r.us}
+          EU <b className="text-sport-blue">{r.eu}</b> · US {r.us}
         </>
       );
     }
@@ -164,7 +164,7 @@ export default function SizeCalculator() {
       const r = findRow(kids, "height", n);
       return r && (
         <>
-          Розмір <b className="text-sport-lime">{r.label}</b> · орієнтовно {r.age}
+          Розмір <b className="text-sport-blue">{r.label}</b> · орієнтовно {r.age}
         </>
       );
     }
@@ -175,7 +175,7 @@ export default function SizeCalculator() {
       const r = findRow(rows, "foot", n);
       return r && (
         <>
-          EU <b className="text-sport-lime">{r.eu}</b> · UK {r.uk} · US {r.us}
+          EU <b className="text-sport-blue">{r.eu}</b> · UK {r.uk} · US {r.us}
         </>
       );
     }
@@ -193,7 +193,11 @@ export default function SizeCalculator() {
   };
 
   return (
-    <div className="rounded-xl border border-sport-line bg-sport-surface text-sport-ink p-5 md:p-7">
+    <div className="rounded-xl border border-sport-line bg-sport-surface text-sport-ink p-5 md:p-6 shadow-blueGlow">
+      <div className="flex items-center justify-between mb-4">
+        <span className="text-[11px] uppercase tracking-[0.3em] text-sport-blue">Калькулятор</span>
+        <span className="text-[11px] text-sport-mute">см → EU / UA / US</span>
+      </div>
       <div className="flex flex-wrap gap-2 mb-5">
         {(Object.keys(labels) as Category[]).map((k) => (
           <button
@@ -203,7 +207,7 @@ export default function SizeCalculator() {
             className={
               "rounded-full px-3 py-1.5 text-xs md:text-sm font-semibold uppercase tracking-wide border transition-colors " +
               (cat === k
-                ? "bg-sport-lime text-sport-bg border-sport-lime"
+                ? "bg-sport-blue text-sport-bg border-sport-blue"
                 : "border-sport-line text-sport-mute hover:text-sport-ink hover:border-sport-ink")
             }
           >
@@ -212,7 +216,7 @@ export default function SizeCalculator() {
         ))}
       </div>
 
-      <div className="grid md:grid-cols-2 gap-5 items-end">
+      <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-3">
           {(cat === "women-top" || cat === "men-top") && (
             <LabeledInput label="Обхват грудей, см" value={chest} onChange={setChest} hint="вимірюйте по найвищих точках" />
@@ -261,7 +265,7 @@ function LabeledInput({
         value={value}
         inputMode="decimal"
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full rounded-md bg-sport-bg border border-sport-line px-3 py-2.5 text-lg font-display text-sport-ink outline-none focus:border-sport-lime"
+        className="mt-1 w-full rounded-md bg-sport-bg border border-sport-line px-3 py-2.5 text-lg font-display text-sport-ink outline-none focus:border-sport-blue"
         placeholder="—"
       />
       {hint && <span className="block text-[11px] text-sport-mute mt-1">{hint}</span>}
