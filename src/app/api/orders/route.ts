@@ -20,6 +20,7 @@ const schema = z.object({
   np: z.string().min(1).max(100),
   payment: z.string().min(1).max(50),
   comment: z.string().max(1000).optional().or(z.literal("")),
+  cardLast4: z.string().regex(/^\d{4}$/).optional(),
   items: z.array(itemSchema).min(1),
 });
 
@@ -35,6 +36,13 @@ export async function POST(req: Request) {
 
     const total = data.items.reduce((s, i) => s + i.price * i.quantity, 0);
 
+    const commentParts: string[] = [];
+    if (data.comment) commentParts.push(data.comment);
+    if (data.payment === "card-online" && data.cardLast4) {
+      commentParts.push(`[Онлайн-оплата: •••• ${data.cardLast4}]`);
+    }
+    const combinedComment = commentParts.join("\n") || null;
+
     await ensureSchema();
     const order = await prisma.order.create({
       data: {
@@ -45,7 +53,7 @@ export async function POST(req: Request) {
         city: data.city,
         np: data.np,
         payment: data.payment,
-        comment: data.comment || null,
+        comment: combinedComment,
         total,
         items: {
           create: data.items.map((i) => ({

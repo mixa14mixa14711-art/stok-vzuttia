@@ -1,4 +1,4 @@
-# Nata Шум Сток — сайт-магазин
+# Nata Stok — сайт-магазин
 
 Магазин стокового одягу та взуття з Європи. Джерело контенту — TikTok [@natashumkiv](https://www.tiktok.com/@natashumkiv).
 

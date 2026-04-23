@@ -6,6 +6,7 @@ import { useCart } from "@/components/CartProvider";
 import { useGeo } from "@/components/GeoProvider";
 import { formatUAH } from "@/lib/products";
 import Link from "next/link";
+import { CardPaymentForm, cardPaymentValid, type CardPayment } from "@/components/CardPaymentForm";
 
 export default function CheckoutPage() {
   const { items, total, clear } = useCart();
@@ -25,6 +26,13 @@ export default function CheckoutPage() {
     comment: "",
   });
 
+  const [card, setCard] = useState<CardPayment>({
+    number: "",
+    holder: "",
+    exp: "",
+    cvv: "",
+  });
+
   useEffect(() => {
     if (geo.status === "granted" && geo.city && !form.city) {
       setForm((f) => ({ ...f, city: geo.city as string }));
@@ -40,14 +48,20 @@ export default function CheckoutPage() {
       setError("Кошик порожній");
       return;
     }
+    if (form.payment === "card-online" && !cardPaymentValid(card)) {
+      setError("Перевірте реквізити картки: номер, термін дії, CVV, власник.");
+      return;
+    }
     setSubmitting(true);
     setError(null);
     try {
+      const last4 = card.number.replace(/\D/g, "").slice(-4);
       const res = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
+          cardLast4: form.payment === "card-online" ? last4 : undefined,
           items: items.map((i) => ({
             productId: i.productId,
             title: i.title,
@@ -148,21 +162,43 @@ export default function CheckoutPage() {
             <h2 className="font-semibold mb-3">Оплата</h2>
             <div className="space-y-2">
               {[
-                { v: "np-cod", l: "Післяплата (накладений платіж Нової Пошти)" },
-                { v: "prepay-card", l: "Повна передоплата на карту Приват / Моно" },
+                {
+                  v: "card-online",
+                  l: "Онлайн-оплата карткою (Visa / Mastercard)",
+                  hint: "3-D Secure · моментальне підтвердження замовлення",
+                },
+                { v: "np-cod", l: "Післяплата (накладений платіж Нової Пошти)", hint: "Оплата при отриманні" },
+                { v: "prepay-card", l: "Передоплата на карту Приват / Моно", hint: "Реквізити надішлемо після оформлення" },
               ].map((opt) => (
-                <label key={opt.v} className="flex items-center gap-3 border border-neutral-200 rounded px-3 py-2 cursor-pointer hover:border-brand-400">
+                <label
+                  key={opt.v}
+                  className={
+                    "flex items-start gap-3 border rounded px-3 py-2.5 cursor-pointer transition-colors " +
+                    (form.payment === opt.v
+                      ? "border-brand-600 bg-brand-50"
+                      : "border-neutral-200 hover:border-brand-400")
+                  }
+                >
                   <input
                     type="radio"
                     name="payment"
                     value={opt.v}
                     checked={form.payment === opt.v}
                     onChange={update("payment")}
+                    className="mt-1"
                   />
-                  <span className="text-sm">{opt.l}</span>
+                  <span className="flex flex-col">
+                    <span className="text-sm font-medium">{opt.l}</span>
+                    <span className="text-xs text-neutral-500">{opt.hint}</span>
+                  </span>
                 </label>
               ))}
             </div>
+            {form.payment === "card-online" && (
+              <div className="mt-4">
+                <CardPaymentForm value={card} onChange={setCard} />
+              </div>
+            )}
           </div>
 
           <Field label="Коментар до замовлення">

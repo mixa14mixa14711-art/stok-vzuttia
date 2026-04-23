@@ -1,5 +1,5 @@
 export const SHOP_INFO = {
-  name: "Nata Шум Сток",
+  name: "Nata Stok",
   tagline: "Сток одягу та взуття з Європи",
   source: "TikTok @natashumkiv",
   phone: "+38 050 57 56 811",
