@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Environment, ContactShadows, Html } from "@react-three/drei";
+import { Float, ContactShadows } from "@react-three/drei";
 import { Suspense, useMemo, useRef } from "react";
 import * as THREE from "three";
 
@@ -14,11 +14,15 @@ function OrbitCluster() {
   const items = useMemo(() => {
     const colors = ["#ff2d2d", "#ff6a1a", "#d4ff00", "#00e5ff", "#ffffff"];
     return Array.from({ length: 14 }).map((_, i) => {
-      const r = 2.6 + Math.random() * 0.6;
+      const r = 2.6 + (i % 3) * 0.25;
       const a = (i / 14) * Math.PI * 2;
       return {
-        position: [Math.cos(a) * r, (Math.random() - 0.5) * 1.2, Math.sin(a) * r] as [number, number, number],
-        scale: 0.2 + Math.random() * 0.35,
+        position: [Math.cos(a) * r, ((i * 13) % 10) / 10 - 0.5, Math.sin(a) * r] as [
+          number,
+          number,
+          number
+        ],
+        scale: 0.22 + ((i * 7) % 10) / 30,
         color: colors[i % colors.length],
         kind: i % 3,
       };
@@ -28,7 +32,7 @@ function OrbitCluster() {
   return (
     <group ref={group}>
       {items.map((it, idx) => (
-        <Float key={idx} speed={1.2} rotationIntensity={1.1} floatIntensity={1.6}>
+        <Float key={idx} speed={1.2} rotationIntensity={1} floatIntensity={1.4}>
           <mesh position={it.position} scale={it.scale} castShadow>
             {it.kind === 0 ? (
               <boxGeometry args={[1.1, 1.1, 1.1]} />
@@ -39,10 +43,10 @@ function OrbitCluster() {
             )}
             <meshStandardMaterial
               color={it.color}
-              metalness={0.35}
-              roughness={0.25}
+              metalness={0.4}
+              roughness={0.3}
               emissive={it.color}
-              emissiveIntensity={it.color === "#ffffff" ? 0 : 0.25}
+              emissiveIntensity={it.color === "#ffffff" ? 0 : 0.3}
             />
           </mesh>
         </Float>
@@ -60,17 +64,15 @@ function CoreShape() {
     }
   });
   return (
-    <Float speed={1.8} rotationIntensity={0.6} floatIntensity={0.8}>
+    <Float speed={1.6} rotationIntensity={0.6} floatIntensity={0.6}>
       <mesh ref={ref} castShadow receiveShadow>
         <torusKnotGeometry args={[0.9, 0.32, 180, 28]} />
-        <meshPhysicalMaterial
+        <meshStandardMaterial
           color="#ff2d2d"
-          metalness={0.85}
-          roughness={0.15}
-          clearcoat={1}
-          clearcoatRoughness={0.1}
+          metalness={0.8}
+          roughness={0.2}
           emissive="#ff2d2d"
-          emissiveIntensity={0.25}
+          emissiveIntensity={0.35}
         />
       </mesh>
     </Float>
@@ -89,17 +91,11 @@ export default function Hero3D() {
       <color attach="background" args={["#0a0a0b"]} />
       <fog attach="fog" args={["#0a0a0b", 6, 14]} />
 
-      <Suspense
-        fallback={
-          <Html center>
-            <div className="text-xs text-neutral-400">Завантаження 3D…</div>
-          </Html>
-        }
-      >
-        <ambientLight intensity={0.45} />
-        <directionalLight position={[5, 6, 5]} intensity={1.4} castShadow />
-        <pointLight position={[-4, -2, -2]} intensity={0.8} color="#d4ff00" />
-        <pointLight position={[4, 2, -2]} intensity={0.8} color="#ff2d2d" />
+      <Suspense fallback={null}>
+        <ambientLight intensity={0.6} />
+        <directionalLight position={[5, 6, 5]} intensity={1.6} castShadow />
+        <pointLight position={[-4, -2, -2]} intensity={1.1} color="#d4ff00" />
+        <pointLight position={[4, 2, -2]} intensity={1.1} color="#ff2d2d" />
 
         <CoreShape />
         <OrbitCluster />
@@ -112,7 +108,6 @@ export default function Hero3D() {
           far={4}
           color="#000"
         />
-        <Environment preset="city" />
       </Suspense>
     </Canvas>
   );
