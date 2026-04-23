@@ -16,6 +16,32 @@ export function Header({ user }: Props) {
 
   return (
     <header className="border-b border-neutral-200 bg-white sticky top-0 z-40">
+      <div className="bg-neutral-900 text-white text-xs">
+        <div className="mx-auto max-w-6xl px-4 py-1.5 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+          <div className="flex items-center gap-3">
+            <a href={`tel:${SHOP_INFO.phoneDigits}`} className="hover:text-brand-300">
+              {SHOP_INFO.phone}
+            </a>
+            <a
+              href={`viber://chat?number=${SHOP_INFO.viber}`}
+              className="hover:text-brand-300"
+              aria-label="Viber"
+            >
+              Viber
+            </a>
+            <a
+              href={SHOP_INFO.tiktokUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-brand-300"
+            >
+              TikTok {SHOP_INFO.tiktok}
+            </a>
+          </div>
+          <div className="text-neutral-400">{SHOP_INFO.workHours}</div>
+        </div>
+      </div>
+
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex items-center justify-between h-16 gap-4">
           <Link href="/" className="flex flex-col leading-tight">
@@ -33,8 +59,14 @@ export function Header({ user }: Props) {
                 {d.title}
               </Link>
             ))}
-            <Link href="/delivery" className="hover:text-brand-600">
-              Доставка і оплата
+            <Link href="/brands" className="hover:text-brand-600">
+              Бренди
+            </Link>
+            <Link href="/sale" className="hover:text-brand-600 text-red-600">
+              Акції
+            </Link>
+            <Link href="/wholesale" className="hover:text-brand-600">
+              Опт
             </Link>
             <Link href="/contacts" className="hover:text-brand-600">
               Контакти
@@ -93,6 +125,15 @@ export function Header({ user }: Props) {
                 {d.title}
               </Link>
             ))}
+            <Link href="/brands" onClick={() => setOpen(false)} className="py-1">
+              Бренди
+            </Link>
+            <Link href="/sale" onClick={() => setOpen(false)} className="py-1 text-red-600">
+              Акції
+            </Link>
+            <Link href="/wholesale" onClick={() => setOpen(false)} className="py-1">
+              Опт
+            </Link>
             <Link href="/delivery" onClick={() => setOpen(false)} className="py-1">
               Доставка і оплата
             </Link>

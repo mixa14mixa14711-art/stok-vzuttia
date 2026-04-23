@@ -4,9 +4,10 @@ export type Category =
   | "kids-clothing"
   | "women-shoes"
   | "men-shoes"
-  | "kids-shoes";
+  | "kids-shoes"
+  | "mix";
 
-export type Department = "women" | "men" | "kids" | "shoes";
+export type Department = "women" | "men" | "kids" | "shoes" | "mix";
 
 export type Product = {
   id: string;
@@ -29,6 +30,7 @@ export const CATEGORIES: Record<Category, { title: string; department: Departmen
   "women-shoes": { title: "Жіноче взуття", department: "shoes" },
   "men-shoes": { title: "Чоловіче взуття", department: "shoes" },
   "kids-shoes": { title: "Дитяче взуття", department: "shoes" },
+  "mix": { title: "Мікс", department: "mix" },
 };
 
 export const DEPARTMENTS: {
@@ -40,6 +42,7 @@ export const DEPARTMENTS: {
   { slug: "men", title: "Чоловікам", categories: ["men-clothing", "men-shoes"] },
   { slug: "kids", title: "Дітям", categories: ["kids-clothing", "kids-shoes"] },
   { slug: "shoes", title: "Взуття", categories: ["women-shoes", "men-shoes", "kids-shoes"] },
+  { slug: "mix", title: "Мікс", categories: ["mix"] },
 ];
 
 const img = (id: string) => `https://picsum.photos/seed/${id}/800/1000`;
@@ -302,6 +305,136 @@ export const PRODUCTS: Product[] = [
     images: [img("ks3a"), img("ks3b")],
     badge: "-30%",
   },
+
+  // WOMEN CLOTHING — extra brands
+  {
+    id: "w5",
+    slug: "sviter-bershka-oversize",
+    title: "Светр Bershka oversize",
+    brand: "Bershka",
+    category: "women-clothing",
+    price: 590,
+    sizes: ["S", "M", "L"],
+    description: "Тепла в'язка, крупна текстура. Оригінал Bershka, сток з Іспанії.",
+    images: [img("w5a"), img("w5b")],
+  },
+  {
+    id: "w6",
+    slug: "topok-pull-bear-krop",
+    title: "Топ Pull&Bear кроп",
+    brand: "Pull&Bear",
+    category: "women-clothing",
+    price: 390,
+    oldPrice: 590,
+    sizes: ["XS", "S", "M"],
+    description: "Укорочений топ Pull&Bear 100% бавовна. Оригінал, сток з Іспанії.",
+    images: [img("w6a"), img("w6b")],
+    badge: "SALE",
+  },
+  {
+    id: "w7",
+    slug: "bluzka-stradivarius-satin",
+    title: "Блуза Stradivarius сатин",
+    brand: "Stradivarius",
+    category: "women-clothing",
+    price: 520,
+    sizes: ["XS", "S", "M", "L"],
+    description: "Сатинова блуза Stradivarius, оригінал. Сток з Іспанії.",
+    images: [img("w7a"), img("w7b")],
+  },
+
+  // MEN CLOTHING — extra brands
+  {
+    id: "m5",
+    slug: "sorochka-jackjones-linen",
+    title: "Сорочка Jack&Jones льон",
+    brand: "Jack&Jones",
+    category: "men-clothing",
+    price: 790,
+    sizes: ["S", "M", "L", "XL"],
+    description: "Льняна сорочка Jack&Jones, регуляр крій. Оригінал, сток із ЄС.",
+    images: [img("m5a"), img("m5b")],
+  },
+  {
+    id: "m6",
+    slug: "polo-lacoste-classic",
+    title: "Поло Lacoste Classic",
+    brand: "Lacoste",
+    category: "men-clothing",
+    price: 1490,
+    oldPrice: 2190,
+    sizes: ["M", "L", "XL"],
+    description: "Класичне поло Lacoste, піке. Оригінал, сток з Франції.",
+    images: [img("m6a"), img("m6b")],
+    badge: "-30%",
+  },
+
+  // KIDS CLOTHING — extra brand
+  {
+    id: "k5",
+    slug: "futbolka-boboli-kids",
+    title: "Футболка Boboli Kids",
+    brand: "Boboli Kids",
+    category: "kids-clothing",
+    price: 290,
+    sizes: ["92", "98", "104", "110", "116"],
+    description: "Яскрава дитяча футболка Boboli Kids 100% бавовна. Оригінал, сток з Іспанії.",
+    images: [img("k5a"), img("k5b")],
+  },
+
+  // MIX (gурт/мікс-лоти)
+  {
+    id: "mx1",
+    slug: "miks-zhinochyi-10kh",
+    title: "Мікс жіночий — 10 одиниць",
+    brand: "MIX",
+    category: "mix",
+    price: 2900,
+    sizes: ["Лот"],
+    description:
+      "Мікс-лот жіночого одягу (10 одиниць) від Zara, Bershka, H&M, Mango, Stradivarius тощо. Оригінал, сток з Європи.",
+    images: [img("mx1a"), img("mx1b")],
+    badge: "ЛОТ",
+  },
+  {
+    id: "mx2",
+    slug: "miks-cholovichyi-10kh",
+    title: "Мікс чоловічий — 10 одиниць",
+    brand: "MIX",
+    category: "mix",
+    price: 2700,
+    sizes: ["Лот"],
+    description:
+      "Мікс-лот чоловічого одягу (10 одиниць) від Jack&Jones, Zara, H&M, Tom Tailor, Gant. Оригінал, сток з Європи.",
+    images: [img("mx2a"), img("mx2b")],
+    badge: "ЛОТ",
+  },
+  {
+    id: "mx3",
+    slug: "miks-dytyachyi-10kh",
+    title: "Мікс дитячий — 10 одиниць",
+    brand: "MIX BRANDS KIDS",
+    category: "mix",
+    price: 1800,
+    sizes: ["Лот"],
+    description:
+      "Мікс-лот дитячого одягу (10 одиниць) від H&M, Zara Kids, Boboli, Next, Lindex. Оригінал, сток з Європи.",
+    images: [img("mx3a"), img("mx3b")],
+    badge: "ЛОТ",
+  },
+  {
+    id: "mx4",
+    slug: "miks-vzuttia-5par",
+    title: "Мікс взуття — 5 пар",
+    brand: "SPORTS MIX",
+    category: "mix",
+    price: 3500,
+    sizes: ["Лот"],
+    description:
+      "Мікс-лот взуття (5 пар) Nike / Adidas / Puma. Оригінал, асортиментне сортування, сток з Європи.",
+    images: [img("mx4a"), img("mx4b")],
+    badge: "ЛОТ",
+  },
 ];
 
 export function getProductsByCategory(category: Category): Product[] {
@@ -315,6 +448,20 @@ export function getProductsByDepartment(dep: Department): Product[] {
 
 export function getProductBySlug(slug: string): Product | undefined {
   return PRODUCTS.find((p) => p.slug === slug);
+}
+
+export function getSaleProducts(): Product[] {
+  return PRODUCTS.filter((p) => typeof p.oldPrice === "number" && p.oldPrice > p.price);
+}
+
+export function getProductsByBrand(brand: string): Product[] {
+  return PRODUCTS.filter((p) => p.brand.toLowerCase() === brand.toLowerCase());
+}
+
+export function getAllBrands(): string[] {
+  const s = new Set<string>();
+  PRODUCTS.forEach((p) => s.add(p.brand));
+  return Array.from(s).sort((a, b) => a.localeCompare(b, "uk"));
 }
 
 export function formatUAH(value: number): string {

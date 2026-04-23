@@ -7,16 +7,38 @@ export default function ContactsPage() {
     <div className="mx-auto max-w-3xl px-4 py-10">
       <h1 className="text-2xl md:text-3xl font-bold">Контакти</h1>
       <p className="text-neutral-600 mt-2">
-        Ми у соцмережах та на зв&apos;язку щодня.
+        Ми у соцмережах та на зв&apos;язку щодня. Пишіть у Viber, Telegram або TikTok.
       </p>
 
       <div className="mt-6 grid sm:grid-cols-2 gap-4">
-        <Card title="Телефон" value={SHOP_INFO.phone} href={`tel:${SHOP_INFO.phone.replace(/\s|[()-]/g, "")}`} />
+        <Card
+          title="Телефон"
+          value={SHOP_INFO.phone}
+          href={`tel:${SHOP_INFO.phoneDigits}`}
+        />
+        <Card
+          title="Viber"
+          value={SHOP_INFO.phone}
+          href={`viber://chat?number=${SHOP_INFO.viber}`}
+        />
+        <Card
+          title="TikTok"
+          value={SHOP_INFO.tiktok}
+          href={SHOP_INFO.tiktokUrl}
+        />
+        <Card
+          title="Telegram"
+          value={SHOP_INFO.telegram}
+          href={`https://t.me/${SHOP_INFO.telegram.replace("@", "")}`}
+        />
+        <Card
+          title="Instagram"
+          value={`@${SHOP_INFO.instagram}`}
+          href={`https://instagram.com/${SHOP_INFO.instagram}`}
+        />
         <Card title="Email" value={SHOP_INFO.email} href={`mailto:${SHOP_INFO.email}`} />
-        <Card title="Telegram" value={SHOP_INFO.telegram} href={`https://t.me/${SHOP_INFO.telegram.replace("@", "")}`} />
-        <Card title="Instagram" value={`@${SHOP_INFO.instagram}`} href={`https://instagram.com/${SHOP_INFO.instagram}`} />
-        <Card title="TikTok" value={SHOP_INFO.tiktok} href={`https://www.tiktok.com/${SHOP_INFO.tiktok}`} />
         <Card title="Графік роботи" value={SHOP_INFO.workHours} />
+        <Card title="Місто" value={SHOP_INFO.city} />
       </div>
     </div>
   );

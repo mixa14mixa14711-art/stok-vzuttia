@@ -10,6 +10,7 @@ const DEPT_IMAGES: Record<string, string> = {
   men: "https://picsum.photos/seed/dept-men/600/700",
   kids: "https://picsum.photos/seed/dept-kids/600/700",
   shoes: "https://picsum.photos/seed/dept-shoes/600/700",
+  mix: "https://picsum.photos/seed/dept-mix/600/700",
 };
 
 export default function HomePage() {
@@ -58,7 +59,7 @@ export default function HomePage() {
       {/* DEPARTMENTS */}
       <section className="mx-auto max-w-6xl px-4 py-10">
         <h2 className="text-xl md:text-2xl font-bold mb-5">Відділи</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {DEPARTMENTS.map((d) => (
             <Link
               key={d.slug}

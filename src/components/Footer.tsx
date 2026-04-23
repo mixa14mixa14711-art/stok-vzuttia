@@ -16,24 +16,65 @@ export function Footer() {
             <li><Link href="/delivery">Доставка і оплата</Link></li>
             <li><Link href="/about">Про нас</Link></li>
             <li><Link href="/contacts">Контакти</Link></li>
+            <li><Link href="/wholesale">Опт / Великий гурт</Link></li>
           </ul>
         </div>
         <div>
-          <div className="font-semibold mb-2">Відділи</div>
+          <div className="font-semibold mb-2">Каталог</div>
           <ul className="space-y-1 text-neutral-700">
             <li><Link href="/catalog/women">Жінкам</Link></li>
             <li><Link href="/catalog/men">Чоловікам</Link></li>
             <li><Link href="/catalog/kids">Дітям</Link></li>
             <li><Link href="/catalog/shoes">Взуття</Link></li>
+            <li><Link href="/catalog/mix">Мікс</Link></li>
+            <li><Link href="/brands">Бренди</Link></li>
+            <li><Link href="/new">Нові надходження</Link></li>
+            <li><Link href="/sale" className="text-red-600">Акції</Link></li>
           </ul>
         </div>
         <div>
           <div className="font-semibold mb-2">Контакти</div>
           <ul className="space-y-1 text-neutral-700">
-            <li>{SHOP_INFO.phone}</li>
-            <li>{SHOP_INFO.email}</li>
-            <li>Telegram: {SHOP_INFO.telegram}</li>
-            <li>TikTok: {SHOP_INFO.tiktok}</li>
+            <li>
+              <a href={`tel:${SHOP_INFO.phoneDigits}`} className="hover:text-brand-600">
+                {SHOP_INFO.phone}
+              </a>
+            </li>
+            <li>
+              <a
+                href={`viber://chat?number=${SHOP_INFO.viber}`}
+                className="hover:text-brand-600"
+              >
+                Viber: {SHOP_INFO.phone}
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${SHOP_INFO.email}`} className="hover:text-brand-600">
+                {SHOP_INFO.email}
+              </a>
+            </li>
+            <li>
+              Telegram:{" "}
+              <a
+                href={`https://t.me/${SHOP_INFO.telegram.replace("@", "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-brand-600"
+              >
+                {SHOP_INFO.telegram}
+              </a>
+            </li>
+            <li>
+              TikTok:{" "}
+              <a
+                href={SHOP_INFO.tiktokUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-brand-600"
+              >
+                {SHOP_INFO.tiktok}
+              </a>
+            </li>
             <li className="text-neutral-500 text-xs pt-1">{SHOP_INFO.workHours}</li>
           </ul>
         </div>
