@@ -57,38 +57,49 @@ export default function HomePage() {
               </svg>
               Speed · Style · Stock
             </div>
-            <h1
-              className="font-display font-extrabold tracking-tight text-white"
-              style={{
-                WebkitTextStroke: "2px #ff2d2d",
-                paintOrder: "stroke fill",
-                textShadow:
-                  "0 0 24px rgba(255,45,45,0.45), 0 2px 0 rgba(0,0,0,0.45)",
-              }}
-            >
-              <span className="block text-6xl sm:text-7xl md:text-8xl leading-[0.9]">
+            <h1 className="font-display font-extrabold tracking-tight">
+              {/* ЄВРО — white fill, red stroke */}
+              <span
+                className="block text-6xl sm:text-7xl md:text-8xl leading-[0.9] text-white"
+                style={{
+                  WebkitTextStroke: "2px #ff2d2d",
+                  paintOrder: "stroke fill",
+                  textShadow:
+                    "0 0 24px rgba(255,45,45,0.45), 0 2px 0 rgba(0,0,0,0.45)",
+                }}
+              >
                 ЄВРО
               </span>
-              <span className="block text-6xl sm:text-7xl md:text-8xl leading-[0.9]">
+              {/* МІКС — red fill, white stroke */}
+              <span
+                className="block text-6xl sm:text-7xl md:text-8xl leading-[0.9] mt-1"
+                style={{
+                  color: "#ff2d2d",
+                  WebkitTextStroke: "2px #ffffff",
+                  paintOrder: "stroke fill",
+                  textShadow:
+                    "0 0 28px rgba(255,45,45,0.7), 0 2px 0 rgba(0,0,0,0.5)",
+                }}
+              >
                 МІКС
               </span>
               <span
-                className="block my-3 h-[3px] w-28 bg-brand-500"
+                className="block my-3 h-[3px] w-32 bg-brand-500"
                 style={{ boxShadow: "0 0 18px #ff2d2d" }}
                 aria-hidden
               />
               <span
                 className="block font-display text-2xl sm:text-3xl md:text-4xl leading-tight text-white"
                 style={{
-                  WebkitTextStroke: "0px transparent",
-                  textShadow: "0 0 14px rgba(255,45,45,0.35)",
+                  textShadow:
+                    "0 0 14px rgba(255,255,255,0.25), 0 2px 0 rgba(0,0,0,0.5)",
                 }}
               >
                 взуття · одяг · та<br />
                 аксесуари з Европи
               </span>
               <span
-                className="block mt-3 h-[3px] w-28 bg-brand-500"
+                className="block mt-3 h-[3px] w-32 bg-brand-500"
                 style={{ boxShadow: "0 0 18px #ff2d2d" }}
                 aria-hidden
               />
