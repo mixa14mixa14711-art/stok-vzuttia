@@ -57,7 +57,7 @@ export default function Hero3D() {
     // Orbit cluster
     const orbits = new THREE.Group();
     const colors = [0xff2d2d, 0xff6a1a, 0xd4ff00, 0x00e5ff, 0xffffff];
-    const cluster: { mesh: THREE.Mesh; seed: number }[] = [];
+    const cluster: { mesh: THREE.Mesh; seed: number; initialY: number }[] = [];
     for (let i = 0; i < 14; i++) {
       const r = 2.6 + (i % 3) * 0.25;
       const a = (i / 14) * Math.PI * 2;
@@ -79,12 +79,9 @@ export default function Hero3D() {
       const mesh = new THREE.Mesh(geom, mat);
       const scale = 0.22 + ((i * 7) % 10) / 30;
       mesh.scale.setScalar(scale);
-      mesh.position.set(
-        Math.cos(a) * r,
-        ((i * 13) % 10) / 10 - 0.5,
-        Math.sin(a) * r
-      );
-      cluster.push({ mesh, seed: i });
+      const initialY = ((i * 13) % 10) / 10 - 0.5;
+      mesh.position.set(Math.cos(a) * r, initialY, Math.sin(a) * r);
+      cluster.push({ mesh, seed: i, initialY });
       orbits.add(mesh);
     }
     scene.add(orbits);
@@ -105,7 +102,7 @@ export default function Hero3D() {
       for (const c of cluster) {
         c.mesh.rotation.x = t * 0.6 + c.seed;
         c.mesh.rotation.y = t * 0.9 + c.seed * 0.5;
-        c.mesh.position.y += Math.sin(t * 1.5 + c.seed) * 0.002;
+        c.mesh.position.y = c.initialY + Math.sin(t * 1.5 + c.seed) * 0.1;
       }
 
       renderer.render(scene, camera);

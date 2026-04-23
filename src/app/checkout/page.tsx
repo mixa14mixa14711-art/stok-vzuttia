@@ -13,6 +13,7 @@ export default function CheckoutPage() {
   const geo = useGeo();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [orderComplete, setOrderComplete] = useState(false);
 
   const [form, setForm] = useState({
     customerName: "",
@@ -60,15 +61,25 @@ export default function CheckoutPage() {
       if (!res.ok) {
         throw new Error(data.error || "Помилка оформлення замовлення");
       }
-      clear();
+      setOrderComplete(true);
       router.push(`/checkout/success?order=${data.orderId}`);
       router.refresh();
+      clear();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Невідома помилка");
     } finally {
       setSubmitting(false);
     }
   };
+
+  if (orderComplete) {
+    return (
+      <div className="mx-auto max-w-3xl px-4 py-10 text-center">
+        <h1 className="text-2xl font-bold">Дякуємо!</h1>
+        <p className="text-neutral-600 mt-3">Перенаправляємо на сторінку підтвердження…</p>
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (
