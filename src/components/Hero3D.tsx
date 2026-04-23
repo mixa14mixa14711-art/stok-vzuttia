@@ -3,6 +3,9 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
+// EU emblem geometry: 12 gold 5-pointed stars on a deep-blue disk.
+// Animation: ring orbits slowly; each star counter-rotates to stay upright,
+// wobbles + pulses; secondary "twinkle" stars fly across the disk.
 export default function Hero3D() {
   const mountRef = useRef<HTMLDivElement>(null);
 
@@ -24,34 +27,34 @@ export default function Hero3D() {
     mount.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x000000, 0.075);
+    scene.fog = new THREE.FogExp2(0x00061a, 0.055);
 
     const camera = new THREE.PerspectiveCamera(52, width / height, 0.1, 200);
-    camera.position.set(0, 0.6, 8);
+    camera.position.set(0, 0, 8);
 
-    // --- Lights: dim ambient + cyan + gold + white key lights (black-space feel)
-    scene.add(new THREE.AmbientLight(0x0b1320, 0.45));
-    const cyanL = new THREE.PointLight(0x22d3ee, 2.0, 40);
-    cyanL.position.set(6, 3, -2);
-    scene.add(cyanL);
-    const goldL = new THREE.PointLight(0xfbbf24, 1.3, 40);
-    goldL.position.set(-6, -2, -4);
-    scene.add(goldL);
-    const whiteL = new THREE.PointLight(0xffffff, 1.0, 40);
-    whiteL.position.set(0, 6, 4);
-    scene.add(whiteL);
+    // --- Lights
+    scene.add(new THREE.AmbientLight(0x0a1530, 0.6));
+    const goldKey = new THREE.PointLight(0xfcd116, 2.2, 50);
+    goldKey.position.set(4, 3, 5);
+    scene.add(goldKey);
+    const blueFill = new THREE.PointLight(0x3b6cff, 1.6, 50);
+    blueFill.position.set(-5, -2, 4);
+    scene.add(blueFill);
+    const whiteRim = new THREE.PointLight(0xffffff, 0.8, 40);
+    whiteRim.position.set(0, 6, 6);
+    scene.add(whiteRim);
 
-    // --- STARFIELD: thousands of Points
+    // --- Background starfield (gold/white/blue)
     const starGeo = new THREE.BufferGeometry();
-    const starCount = 1800;
+    const starCount = 1400;
     const positions = new Float32Array(starCount * 3);
     const colors = new Float32Array(starCount * 3);
     const palette = [
       new THREE.Color(0xffffff),
-      new THREE.Color(0xf1f3f8),
-      new THREE.Color(0x22d3ee),
-      new THREE.Color(0x67e8f9),
-      new THREE.Color(0xfbbf24),
+      new THREE.Color(0xfcd116), // EU gold
+      new THREE.Color(0xffe169),
+      new THREE.Color(0x6b8cff),
+      new THREE.Color(0x9fb8ff),
     ];
     for (let i = 0; i < starCount; i++) {
       const r = 25 + Math.random() * 40;
@@ -68,112 +71,149 @@ export default function Hero3D() {
     starGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     starGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
     const starMat = new THREE.PointsMaterial({
-      size: 0.18,
+      size: 0.16,
       sizeAttenuation: true,
       vertexColors: true,
       transparent: true,
-      opacity: 0.95,
+      opacity: 0.9,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
     });
-    const stars = new THREE.Points(starGeo, starMat);
-    scene.add(stars);
+    const starsPoints = new THREE.Points(starGeo, starMat);
+    scene.add(starsPoints);
 
-    // --- PLANET (central) — black metal with subtle cyan atmosphere
-    const planet = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(1.4, 4),
-      new THREE.MeshStandardMaterial({
-        color: 0x0a0a10,
-        metalness: 0.75,
-        roughness: 0.35,
-        emissive: 0x0e4c5a,
-        emissiveIntensity: 0.35,
-      })
-    );
-    planet.position.set(0, 0.2, 0);
-    scene.add(planet);
+    // --- EU blue backdrop disk (soft glow)
+    const EU_BLUE = 0x003399;
+    const EU_GOLD = 0xfcd116;
 
-    // Planet atmosphere glow (large transparent sphere)
-    const atmosphere = new THREE.Mesh(
-      new THREE.SphereGeometry(1.6, 48, 48),
+    const blueDisk = new THREE.Mesh(
+      new THREE.CircleGeometry(3.6, 96),
       new THREE.MeshBasicMaterial({
-        color: 0x22d3ee,
-        transparent: true,
-        opacity: 0.12,
-        blending: THREE.AdditiveBlending,
-        side: THREE.BackSide,
-      })
-    );
-    atmosphere.position.copy(planet.position);
-    scene.add(atmosphere);
-
-    // --- RINGS (Saturn-like, tilted)
-    const ring1 = new THREE.Mesh(
-      new THREE.TorusGeometry(2.6, 0.04, 3, 160),
-      new THREE.MeshBasicMaterial({
-        color: 0x22d3ee,
-        transparent: true,
-        opacity: 0.85,
-        blending: THREE.AdditiveBlending,
-      })
-    );
-    ring1.rotation.x = Math.PI / 2.4;
-    ring1.position.copy(planet.position);
-    scene.add(ring1);
-
-    const ring2 = new THREE.Mesh(
-      new THREE.TorusGeometry(3.0, 0.03, 3, 160),
-      new THREE.MeshBasicMaterial({
-        color: 0xfbbf24,
+        color: EU_BLUE,
         transparent: true,
         opacity: 0.55,
+      })
+    );
+    blueDisk.position.z = -0.4;
+    scene.add(blueDisk);
+
+    // Outer vignette for the disk
+    const blueHalo = new THREE.Mesh(
+      new THREE.RingGeometry(3.55, 4.3, 128),
+      new THREE.MeshBasicMaterial({
+        color: 0x1e3a8a,
+        transparent: true,
+        opacity: 0.35,
+        blending: THREE.AdditiveBlending,
+        side: THREE.DoubleSide,
+      })
+    );
+    blueHalo.position.z = -0.35;
+    scene.add(blueHalo);
+
+    // Faint gold ring where the 12 stars sit (guide line, subtle)
+    const guideRing = new THREE.Mesh(
+      new THREE.TorusGeometry(2.25, 0.012, 8, 160),
+      new THREE.MeshBasicMaterial({
+        color: EU_GOLD,
+        transparent: true,
+        opacity: 0.18,
         blending: THREE.AdditiveBlending,
       })
     );
-    ring2.rotation.x = Math.PI / 2.4;
-    ring2.rotation.y = 0.2;
-    ring2.position.copy(planet.position);
-    scene.add(ring2);
+    guideRing.position.z = -0.1;
+    scene.add(guideRing);
 
-    // --- ORBITING SATELLITES (small glowing shapes)
-    const satellites = new THREE.Group();
-    const satMeta: { mesh: THREE.Mesh; radius: number; speed: number; phase: number; tiltY: number }[] = [];
-    const satColors = [0x22d3ee, 0x67e8f9, 0xfbbf24, 0xffffff, 0xd4ff00];
-    for (let i = 0; i < 10; i++) {
-      const kind = i % 3;
-      const geom =
-        kind === 0
-          ? new THREE.OctahedronGeometry(0.22, 0)
-          : kind === 1
-            ? new THREE.IcosahedronGeometry(0.2, 0)
-            : new THREE.TetrahedronGeometry(0.24, 0);
-      const c = satColors[i % satColors.length];
-      const mat = new THREE.MeshStandardMaterial({
-        color: c,
-        emissive: c,
-        emissiveIntensity: 0.9,
-        metalness: 0.6,
-        roughness: 0.2,
+    // --- Build 5-pointed star geometry (flat, extruded slightly for depth)
+    const makeStarShape = (outerR: number, innerR: number) => {
+      const shape = new THREE.Shape();
+      for (let i = 0; i < 10; i++) {
+        const angle = (i * Math.PI) / 5 - Math.PI / 2;
+        const r = i % 2 === 0 ? outerR : innerR;
+        const x = Math.cos(angle) * r;
+        const y = Math.sin(angle) * r;
+        if (i === 0) shape.moveTo(x, y);
+        else shape.lineTo(x, y);
+      }
+      shape.closePath();
+      return shape;
+    };
+
+    const starShape = makeStarShape(0.36, 0.15);
+    const starGeom = new THREE.ExtrudeGeometry(starShape, {
+      depth: 0.06,
+      bevelEnabled: true,
+      bevelThickness: 0.02,
+      bevelSize: 0.015,
+      bevelSegments: 2,
+      curveSegments: 16,
+    });
+    starGeom.center();
+
+    const starMatGold = new THREE.MeshStandardMaterial({
+      color: EU_GOLD,
+      emissive: 0xffc400,
+      emissiveIntensity: 0.55,
+      metalness: 0.55,
+      roughness: 0.28,
+    });
+
+    // --- 12 stars of the EU emblem
+    const ring = new THREE.Group();
+    const RADIUS = 2.25;
+    type StarData = { mesh: THREE.Mesh; haloMesh: THREE.Mesh; baseAngle: number };
+    const starData: StarData[] = [];
+
+    // Halo (flat billboard) behind each star for glow
+    const haloGeom = new THREE.CircleGeometry(0.55, 24);
+    for (let i = 0; i < 12; i++) {
+      const starMesh = new THREE.Mesh(starGeom, starMatGold.clone());
+      const halo = new THREE.Mesh(
+        haloGeom,
+        new THREE.MeshBasicMaterial({
+          color: EU_GOLD,
+          transparent: true,
+          opacity: 0.18,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+        })
+      );
+      halo.position.z = -0.05;
+      starMesh.add(halo);
+      ring.add(starMesh);
+      starData.push({
+        mesh: starMesh,
+        haloMesh: halo,
+        baseAngle: (i / 12) * Math.PI * 2,
       });
-      const mesh = new THREE.Mesh(geom, mat);
-      const radius = 3.6 + (i % 4) * 0.5;
-      satMeta.push({
-        mesh,
-        radius,
-        speed: 0.2 + (i % 4) * 0.08,
-        phase: (i / 10) * Math.PI * 2,
-        tiltY: ((i * 13) % 10) / 20 - 0.25,
-      });
-      satellites.add(mesh);
     }
-    scene.add(satellites);
+    scene.add(ring);
 
-    // --- COMET / shooting particle (small trailing light)
-    const comet = new THREE.Mesh(
-      new THREE.SphereGeometry(0.08, 12, 12),
-      new THREE.MeshBasicMaterial({ color: 0xfbbf24 })
-    );
-    scene.add(comet);
+    // --- Secondary twinkling gold particles drifting across the blue disk
+    const twinkleCount = 60;
+    const twinkleGeo = new THREE.BufferGeometry();
+    const twinklePos = new Float32Array(twinkleCount * 3);
+    const twinkleSeed: number[] = [];
+    for (let i = 0; i < twinkleCount; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const r = Math.random() * 3.2;
+      twinklePos[i * 3] = Math.cos(a) * r;
+      twinklePos[i * 3 + 1] = Math.sin(a) * r;
+      twinklePos[i * 3 + 2] = -0.2 + Math.random() * 0.3;
+      twinkleSeed.push(Math.random() * 10);
+    }
+    twinkleGeo.setAttribute("position", new THREE.BufferAttribute(twinklePos, 3));
+    const twinkleMat = new THREE.PointsMaterial({
+      color: EU_GOLD,
+      size: 0.09,
+      sizeAttenuation: true,
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const twinkles = new THREE.Points(twinkleGeo, twinkleMat);
+    scene.add(twinkles);
 
     const clock = new THREE.Clock();
     let rafId = 0;
@@ -184,33 +224,50 @@ export default function Hero3D() {
       const dt = clock.getDelta();
       const t = clock.elapsedTime;
 
-      // planet slow spin
-      planet.rotation.y += dt * 0.12;
-      planet.rotation.x += dt * 0.04;
+      // Background starfield slow drift
+      starsPoints.rotation.y += dt * 0.008;
+      starsPoints.rotation.x += dt * 0.003;
 
-      // rings counter-rotate
-      ring1.rotation.z += dt * 0.25;
-      ring2.rotation.z -= dt * 0.18;
-
-      // starfield drift
-      stars.rotation.y += dt * 0.01;
-      stars.rotation.x += dt * 0.004;
-
-      // satellites orbit around planet with a tilted plane
-      for (const s of satMeta) {
-        const angle = s.phase + t * s.speed;
-        s.mesh.position.set(
-          Math.cos(angle) * s.radius,
-          s.tiltY + Math.sin(t * 1.2 + s.phase) * 0.15,
-          Math.sin(angle) * s.radius
-        );
-        s.mesh.rotation.x = t * 1.2 + s.phase;
-        s.mesh.rotation.y = t * 0.9 + s.phase;
+      // Ring orbits slowly, stars stay upright (counter-rotated)
+      const ringAngle = t * 0.12;
+      for (let i = 0; i < starData.length; i++) {
+        const s = starData[i];
+        const a = s.baseAngle + ringAngle;
+        const x = Math.cos(a) * RADIUS;
+        const y = Math.sin(a) * RADIUS;
+        s.mesh.position.set(x, y, 0);
+        // Keep star upright + small wobble + gentle self-spin on Y
+        s.mesh.rotation.z = Math.sin(t * 1.4 + i) * 0.12;
+        s.mesh.rotation.y = Math.sin(t * 0.9 + i * 0.7) * 0.35;
+        // Pulse scale
+        const scale = 1 + Math.sin(t * 2.2 + i * 0.9) * 0.1;
+        s.mesh.scale.setScalar(scale);
+        // Halo opacity pulse (halo inherits rotation; counter-face the camera via setting matrix)
+        const mat = s.haloMesh.material as THREE.MeshBasicMaterial;
+        mat.opacity = 0.12 + (Math.sin(t * 3 + i * 1.1) * 0.5 + 0.5) * 0.22;
       }
 
-      // comet loop (big elliptical path)
-      const ct = t * 0.4;
-      comet.position.set(Math.cos(ct) * 9, Math.sin(ct * 1.3) * 3.5, Math.sin(ct) * 9 - 3);
+      // Blue disk subtle breathing
+      blueDisk.scale.setScalar(1 + Math.sin(t * 0.6) * 0.015);
+      (blueHalo.material as THREE.MeshBasicMaterial).opacity =
+        0.28 + Math.sin(t * 0.8) * 0.06;
+
+      // Twinkle particles drift radially + fade in/out
+      const tpos = twinkleGeo.getAttribute("position") as THREE.BufferAttribute;
+      for (let i = 0; i < twinkleCount; i++) {
+        const seed = twinkleSeed[i];
+        const a0 = seed * 0.6283;
+        const drift = 0.2 + (seed % 1) * 0.3;
+        const rad = (Math.sin(t * drift + seed) * 0.5 + 0.5) * 3.1 + 0.2;
+        tpos.setX(i, Math.cos(a0 + t * 0.15) * rad);
+        tpos.setY(i, Math.sin(a0 + t * 0.15) * rad);
+      }
+      tpos.needsUpdate = true;
+      twinkleMat.opacity = 0.55 + Math.sin(t * 1.1) * 0.25;
+
+      // Guide ring gentle opacity pulse
+      (guideRing.material as THREE.MeshBasicMaterial).opacity =
+        0.14 + Math.sin(t * 0.9) * 0.06;
 
       renderer.render(scene, camera);
       rafId = requestAnimationFrame(tick);
@@ -233,22 +290,23 @@ export default function Hero3D() {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", onResize);
       renderer.dispose();
-      planet.geometry.dispose();
-      (planet.material as THREE.Material).dispose();
-      atmosphere.geometry.dispose();
-      (atmosphere.material as THREE.Material).dispose();
-      ring1.geometry.dispose();
-      (ring1.material as THREE.Material).dispose();
-      ring2.geometry.dispose();
-      (ring2.material as THREE.Material).dispose();
       starGeo.dispose();
       starMat.dispose();
-      comet.geometry.dispose();
-      (comet.material as THREE.Material).dispose();
-      for (const s of satMeta) {
-        s.mesh.geometry.dispose();
+      blueDisk.geometry.dispose();
+      (blueDisk.material as THREE.Material).dispose();
+      blueHalo.geometry.dispose();
+      (blueHalo.material as THREE.Material).dispose();
+      guideRing.geometry.dispose();
+      (guideRing.material as THREE.Material).dispose();
+      starGeom.dispose();
+      starMatGold.dispose();
+      haloGeom.dispose();
+      for (const s of starData) {
         (s.mesh.material as THREE.Material).dispose();
+        (s.haloMesh.material as THREE.Material).dispose();
       }
+      twinkleGeo.dispose();
+      twinkleMat.dispose();
       if (renderer.domElement.parentElement === mount) {
         mount.removeChild(renderer.domElement);
       }
