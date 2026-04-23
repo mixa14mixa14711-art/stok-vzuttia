@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { SignJWT, jwtVerify } from "jose";
-import { prisma } from "./prisma";
+import { ensureSchema, prisma } from "./prisma";
 
 const COOKIE_NAME = "session";
 const ALG = "HS256";
@@ -52,6 +52,7 @@ export async function getSession(): Promise<SessionPayload | null> {
 export async function getCurrentUser() {
   const session = await getSession();
   if (!session) return null;
+  await ensureSchema();
   return prisma.user.findUnique({
     where: { id: session.userId },
     select: { id: true, email: true, name: true, phone: true, createdAt: true },

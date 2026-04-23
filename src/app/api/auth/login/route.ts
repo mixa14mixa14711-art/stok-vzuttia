@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
-import { prisma } from "@/lib/prisma";
+import { ensureSchema, prisma } from "@/lib/prisma";
 import { createSession } from "@/lib/auth";
 
 const schema = z.object({
@@ -17,6 +17,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Некоректні дані" }, { status: 400 });
     }
     const { email, password } = parsed.data;
+    await ensureSchema();
     const user = await prisma.user.findUnique({
       where: { email: email.toLowerCase().trim() },
     });

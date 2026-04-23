@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { prisma } from "@/lib/prisma";
+import { ensureSchema, prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 
 const itemSchema = z.object({
@@ -35,6 +35,7 @@ export async function POST(req: Request) {
 
     const total = data.items.reduce((s, i) => s + i.price * i.quantity, 0);
 
+    await ensureSchema();
     const order = await prisma.order.create({
       data: {
         userId: session?.userId ?? null,

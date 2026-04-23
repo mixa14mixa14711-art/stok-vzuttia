@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
+import { ensureSchema, prisma } from "@/lib/prisma";
 import { formatUAH } from "@/lib/products";
 import { LogoutButton } from "./LogoutButton";
 
@@ -11,6 +11,7 @@ export default async function AccountPage() {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
 
+  await ensureSchema();
   const orders = await prisma.order.findMany({
     where: { userId: user.id },
     include: { items: true },
