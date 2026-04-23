@@ -17,13 +17,13 @@ export function Header({ user }: Props) {
 
   return (
     <header className="sticky top-0 z-40">
-      {/* Top bar — contact strip */}
-      <div className="bg-sport-bg text-sport-ink border-b border-sport-line">
+      {/* Top bar — cosmic contact strip */}
+      <div className="bg-gradient-to-r from-cosmos-void via-cosmos-deep to-cosmos-nebula text-cosmos-ink border-b border-cosmos-line">
         <div className="mx-auto max-w-6xl px-4 py-2.5 flex flex-wrap items-center justify-between gap-x-5 gap-y-2">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <a
               href={`tel:${SHOP_INFO.phoneDigits}`}
-              className="group inline-flex items-center gap-2 font-display text-lg md:text-xl font-bold tracking-wide text-sport-blue hover:text-white transition-colors"
+              className="group inline-flex items-center gap-2 font-display text-lg md:text-xl font-bold tracking-wide text-cosmos-aqua hover:text-cosmos-fuchsia transition-colors"
               aria-label={`Телефонувати ${SHOP_INFO.phone}`}
             >
               <svg
@@ -32,7 +32,7 @@ export function Header({ user }: Props) {
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 aria-hidden
-                className="drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]"
+                className="drop-shadow-[0_0_10px_rgba(34,211,238,0.75)]"
               >
                 <path d="M6.6 10.8c1.5 2.9 3.9 5.3 6.8 6.8l2.3-2.3c.3-.3.7-.4 1.1-.3 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1.1L6.6 10.8z"/>
               </svg>
@@ -40,7 +40,7 @@ export function Header({ user }: Props) {
             </a>
             <a
               href={`viber://chat?number=${SHOP_INFO.viber}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-sport-blue/60 px-3 py-1 text-xs md:text-sm font-semibold text-sport-blue hover:bg-sport-blue hover:text-sport-bg transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full border border-cosmos-purple/60 px-3 py-1 text-xs md:text-sm font-semibold text-cosmos-fuchsia hover:bg-cosmos-purple hover:text-white transition-colors"
               aria-label="Viber"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -52,37 +52,37 @@ export function Header({ user }: Props) {
               href={SHOP_INFO.tiktokUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-sport-blue/60 px-3 py-1 text-xs md:text-sm font-semibold text-sport-blue hover:bg-sport-blue hover:text-sport-bg transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full border border-cosmos-aqua/60 px-3 py-1 text-xs md:text-sm font-semibold text-cosmos-aqua hover:bg-cosmos-aqua hover:text-cosmos-void transition-colors"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                 <path d="M19.5 7.8c-1.8 0-3.3-1.4-3.3-3.2V4h-3.1v12.4c0 1.2-1 2.2-2.2 2.2a2.2 2.2 0 1 1 0-4.4c.2 0 .4 0 .6.1V11a5.3 5.3 0 1 0 4.7 5.3V9.6c1 .7 2.2 1.1 3.5 1.1V7.8h-.2z"/>
               </svg>
               TikTok {SHOP_INFO.tiktok}
             </a>
-            <span className="hidden md:inline text-sport-line">·</span>
+            <span className="hidden md:inline text-cosmos-line">·</span>
             <GeoBadge />
           </div>
-          <div className="text-sport-mute text-xs md:text-sm">{SHOP_INFO.workHours}</div>
+          <div className="text-cosmos-mute text-xs md:text-sm">{SHOP_INFO.workHours}</div>
         </div>
       </div>
 
-      {/* Main nav */}
-      <div className="bg-white/90 backdrop-blur border-b border-neutral-200">
+      {/* Main nav — cosmic */}
+      <div className="bg-cosmos-deep/80 backdrop-blur-md border-b border-cosmos-line">
         <div className="mx-auto max-w-6xl px-4">
           <div className="flex items-center justify-between h-16 gap-4">
             <Link href="/" className="flex items-center gap-2 leading-tight">
-              <span className="inline-block w-2 h-8 bg-brand-600 rounded-sm" />
+              <span className="inline-block w-2 h-8 rounded-sm bg-gradient-to-b from-cosmos-fuchsia to-cosmos-cyan shadow-[0_0_14px_rgba(217,70,239,0.7)]" />
               <div className="flex flex-col">
-                <span className="font-display text-xl tracking-wide text-neutral-900">
+                <span className="font-display text-xl tracking-wide text-cosmos-ink">
                   {SHOP_INFO.name}
                 </span>
-                <span className="text-[11px] text-neutral-500 -mt-1">{SHOP_INFO.tagline}</span>
+                <span className="text-[11px] text-cosmos-mute -mt-1">{SHOP_INFO.tagline}</span>
               </div>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-3 lg:gap-4 text-[13px] font-semibold uppercase tracking-wide">
+            <nav className="hidden md:flex items-center gap-3 lg:gap-4 text-[13px] font-semibold uppercase tracking-wide text-cosmos-ink">
               {DEPARTMENTS.filter((d) => ["women", "men", "kids", "shoes"].includes(d.slug)).map((d) => (
-                <Link key={d.slug} href={`/catalog/${d.slug}`} className="hover:text-brand-600">
+                <Link key={d.slug} href={`/catalog/${d.slug}`} className="hover:text-cosmos-fuchsia">
                   {d.title}
                 </Link>
               ))}
@@ -90,37 +90,37 @@ export function Header({ user }: Props) {
                 <Link
                   key={d.slug}
                   href={`/catalog/${d.slug}`}
-                  className="hidden xl:inline hover:text-brand-600"
+                  className="hidden xl:inline hover:text-cosmos-fuchsia"
                 >
                   {d.title}
                 </Link>
               ))}
-              <Link href="/brands" className="hover:text-brand-600">Бренди</Link>
-              <Link href="/sale" className="text-brand-600 hover:text-brand-700">Акції</Link>
-              <Link href="/wholesale" className="hidden lg:inline hover:text-brand-600">Опт</Link>
-              <Link href="/size-guide" className="hidden lg:inline hover:text-brand-600">Розміри</Link>
-              <Link href="/contacts" className="hover:text-brand-600">Контакти</Link>
+              <Link href="/brands" className="hover:text-cosmos-fuchsia">Бренди</Link>
+              <Link href="/sale" className="text-cosmos-fuchsia hover:text-cosmos-pink">Акції</Link>
+              <Link href="/wholesale" className="hidden lg:inline hover:text-cosmos-fuchsia">Опт</Link>
+              <Link href="/size-guide" className="hidden lg:inline hover:text-cosmos-fuchsia">Розміри</Link>
+              <Link href="/contacts" className="hover:text-cosmos-fuchsia">Контакти</Link>
             </nav>
 
             <div className="flex items-center gap-3">
               {user ? (
-                <Link href="/account" className="hidden sm:block text-sm hover:text-brand-600">
+                <Link href="/account" className="hidden sm:block text-sm text-cosmos-ink hover:text-cosmos-fuchsia">
                   {user.name || user.email}
                 </Link>
               ) : (
-                <div className="hidden sm:flex items-center gap-2 text-sm">
-                  <Link href="/login" className="hover:text-brand-600">Увійти</Link>
-                  <span className="text-neutral-300">/</span>
-                  <Link href="/register" className="hover:text-brand-600">Реєстрація</Link>
+                <div className="hidden sm:flex items-center gap-2 text-sm text-cosmos-ink">
+                  <Link href="/login" className="hover:text-cosmos-fuchsia">Увійти</Link>
+                  <span className="text-cosmos-line">/</span>
+                  <Link href="/register" className="hover:text-cosmos-fuchsia">Реєстрація</Link>
                 </div>
               )}
               <Link
                 href="/cart"
-                className="relative inline-flex items-center gap-2 rounded bg-brand-600 text-white px-4 py-2 text-sm font-bold uppercase tracking-wide hover:bg-brand-700 shadow-glow"
+                className="relative inline-flex items-center gap-2 rounded-full btn-cosmos px-4 py-2 text-sm font-bold uppercase tracking-wide"
               >
                 Кошик
                 {itemCount > 0 && (
-                  <span className="inline-flex items-center justify-center min-w-[22px] h-[22px] rounded-full bg-sport-lime text-neutral-900 text-xs font-bold px-1">
+                  <span className="inline-flex items-center justify-center min-w-[22px] h-[22px] rounded-full bg-cosmos-aqua text-cosmos-void text-xs font-bold px-1">
                     {itemCount}
                   </span>
                 )}
@@ -129,7 +129,7 @@ export function Header({ user }: Props) {
                 type="button"
                 onClick={() => setOpen((v) => !v)}
                 aria-label="Меню"
-                className="md:hidden p-2 -mr-2"
+                className="md:hidden p-2 -mr-2 text-cosmos-ink"
               >
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M3 6h18M3 12h18M3 18h18" />
@@ -139,14 +139,14 @@ export function Header({ user }: Props) {
           </div>
 
           {open && (
-            <div className="md:hidden border-t border-neutral-200 py-3 flex flex-col gap-2 text-sm">
+            <div className="md:hidden border-t border-cosmos-line py-3 flex flex-col gap-2 text-sm text-cosmos-ink">
               {DEPARTMENTS.map((d) => (
                 <Link key={d.slug} href={`/catalog/${d.slug}`} onClick={() => setOpen(false)} className="py-1">
                   {d.title}
                 </Link>
               ))}
               <Link href="/brands" onClick={() => setOpen(false)} className="py-1">Бренди</Link>
-              <Link href="/sale" onClick={() => setOpen(false)} className="py-1 text-brand-600">Акції</Link>
+              <Link href="/sale" onClick={() => setOpen(false)} className="py-1 text-cosmos-fuchsia">Акції</Link>
               <Link href="/new" onClick={() => setOpen(false)} className="py-1">Нові надходження</Link>
               <Link href="/wholesale" onClick={() => setOpen(false)} className="py-1">Опт</Link>
               <Link href="/size-guide" onClick={() => setOpen(false)} className="py-1">Таблиця розмірів</Link>
@@ -156,13 +156,13 @@ export function Header({ user }: Props) {
               <Link href="/returns" onClick={() => setOpen(false)} className="py-1">Обмін та повернення</Link>
               <Link href="/contacts" onClick={() => setOpen(false)} className="py-1">Контакти</Link>
               {!user && (
-                <div className="flex gap-3 pt-2 border-t border-neutral-100">
+                <div className="flex gap-3 pt-2 border-t border-cosmos-line">
                   <Link href="/login" onClick={() => setOpen(false)}>Увійти</Link>
                   <Link href="/register" onClick={() => setOpen(false)}>Реєстрація</Link>
                 </div>
               )}
               {user && (
-                <Link href="/account" onClick={() => setOpen(false)} className="pt-2 border-t border-neutral-100">
+                <Link href="/account" onClick={() => setOpen(false)} className="pt-2 border-t border-cosmos-line">
                   Мій кабінет
                 </Link>
               )}

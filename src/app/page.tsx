@@ -33,9 +33,9 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* HERO */}
-      <section className="relative overflow-hidden sport-bg noise clip-slant">
-        <div className="absolute inset-0 sport-grid opacity-40" />
+      {/* HERO — cosmic */}
+      <section className="relative overflow-hidden cosmos-bg noise clip-slant">
+        <div className="absolute inset-0 cosmos-grid opacity-30" />
         <div className="absolute inset-0">
           <ErrorBoundary fallback={null}>
             <Hero3D />
@@ -43,16 +43,16 @@ export default function HomePage() {
         </div>
         <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-28">
           <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-sport-lime mb-4">
-              <span className="w-8 h-px bg-sport-lime" />
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-cosmos-aqua mb-4">
+              <span className="w-8 h-px bg-cosmos-aqua" />
               {SHOP_INFO.source}
             </div>
-            <h1 className="font-display text-5xl md:text-7xl leading-[0.95] text-white">
+            <h1 className="font-display text-5xl md:text-7xl leading-[0.95] text-white drop-shadow-[0_0_20px_rgba(168,85,247,0.45)]">
               СТОК<br />
-              <span className="text-brand-500">З ЄВРОПИ.</span><br />
-              НА СТАРТ.
+              <span className="cosmos-text">З ЄВРОПИ.</span><br />
+              У ЦІЙ ГАЛАКТИЦІ.
             </h1>
-            <p className="mt-5 text-white/80 max-w-md">
+            <p className="mt-5 text-cosmos-mute max-w-md">
               Оригінальні бренди — Zara, H&M, Reserved, Bershka, Nike, Adidas. Жіночий,
               чоловічий, дитячий одяг та взуття + мікс-лоти оптом. Доставка Новою Поштою
               по всій Україні.
@@ -60,19 +60,19 @@ export default function HomePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/new"
-                className="bg-brand-600 hover:bg-brand-700 text-white font-bold uppercase tracking-wide px-6 py-3 rounded shadow-glow animate-pulseGlow"
+                className="btn-cosmos font-bold uppercase tracking-wide px-6 py-3 rounded-full animate-cosmicPulse"
               >
                 Нові надходження
               </Link>
               <Link
                 href="/catalog/mix"
-                className="bg-sport-lime hover:bg-sport-lime/90 text-neutral-900 font-bold uppercase tracking-wide px-6 py-3 rounded shadow-limeGlow"
+                className="bg-cosmos-aqua hover:bg-cosmos-cyan text-cosmos-void font-bold uppercase tracking-wide px-6 py-3 rounded-full shadow-[0_0_40px_-5px_rgba(34,211,238,0.6)]"
               >
                 Мікс-лоти
               </Link>
               <Link
                 href="/wholesale"
-                className="border border-white/30 text-white hover:border-white hover:bg-white/5 font-bold uppercase tracking-wide px-6 py-3 rounded"
+                className="border border-cosmos-purple/50 text-cosmos-ink hover:border-cosmos-purple hover:bg-cosmos-purple/10 font-bold uppercase tracking-wide px-6 py-3 rounded-full"
               >
                 Опт
               </Link>
@@ -81,12 +81,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* BRAND MARQUEE */}
-      <section className="bg-neutral-900 text-white py-4 overflow-hidden border-y border-sport-line">
+      {/* BRAND MARQUEE — cosmic bar */}
+      <section className="relative bg-gradient-to-r from-cosmos-void via-cosmos-deep to-cosmos-void text-white py-4 overflow-hidden border-y border-cosmos-line">
         <div className="flex gap-12 whitespace-nowrap animate-marquee w-max">
           {[...MARQUEE, ...MARQUEE].map((b, i) => (
-            <span key={i} className="font-display text-2xl tracking-widest text-white/80">
-              {b} <span className="text-brand-500 mx-3">★</span>
+            <span key={i} className="font-display text-2xl tracking-widest text-cosmos-ink/90">
+              {b} <span className="text-cosmos-fuchsia mx-3">✦</span>
             </span>
           ))}
         </div>
@@ -95,32 +95,37 @@ export default function HomePage() {
       {/* DEPARTMENTS */}
       <section className="mx-auto max-w-6xl px-4 py-12">
         <div className="flex items-end justify-between mb-6">
-          <h2 className="font-display text-3xl md:text-4xl">Відділи</h2>
-          <Link href="/brands" className="text-sm text-brand-600 font-semibold hover:underline">
+          <h2 className="font-display text-3xl md:text-4xl text-cosmos-ink">
+            Галактика <span className="cosmos-text">відділів</span>
+          </h2>
+          <Link href="/brands" className="text-sm text-cosmos-aqua font-semibold hover:text-cosmos-fuchsia">
             Усі бренди →
           </Link>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-4">
           {DEPARTMENTS.map((d) => (
             <Link
               key={d.slug}
               href={`/catalog/${d.slug}`}
-              className="group relative rounded-lg overflow-hidden aspect-[4/5] bg-neutral-200"
+              className="group relative rounded-xl overflow-hidden aspect-[4/5] cosmos-card"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={DEPT_IMAGES[d.slug]}
                 alt={d.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover opacity-80 group-hover:scale-110 group-hover:opacity-100 transition-all duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-cosmos-void/95 via-cosmos-deep/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-br from-cosmos-purple/25 via-transparent to-cosmos-cyan/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute top-3 left-3 right-3 flex justify-between">
-                <span className="text-[10px] uppercase tracking-widest text-sport-lime">{d.slug}</span>
+                <span className="text-[10px] uppercase tracking-widest text-cosmos-aqua">{d.slug}</span>
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <div className="font-display text-white text-2xl tracking-wide">{d.title}</div>
-                <div className="text-white/70 text-xs mt-1 group-hover:text-brand-400 transition">
-                  Перейти до каталогу →
+                <div className="font-display text-white text-2xl tracking-wide drop-shadow-[0_0_14px_rgba(168,85,247,0.6)]">
+                  {d.title}
+                </div>
+                <div className="text-cosmos-mute text-xs mt-1 group-hover:text-cosmos-fuchsia transition">
+                  Відкрити каталог →
                 </div>
               </div>
             </Link>
@@ -131,10 +136,10 @@ export default function HomePage() {
       {/* FEATURED */}
       <section className="mx-auto max-w-6xl px-4 py-6">
         <div className="flex items-baseline justify-between mb-5">
-          <h2 className="font-display text-3xl md:text-4xl">
-            Акції та хіти <span className="text-brand-600">—</span>
+          <h2 className="font-display text-3xl md:text-4xl text-cosmos-ink">
+            <span className="cosmos-text">Акції</span> та хіти
           </h2>
-          <Link href="/sale" className="text-sm text-brand-700 font-semibold hover:underline">
+          <Link href="/sale" className="text-sm text-cosmos-fuchsia font-semibold hover:text-cosmos-pink">
             Усі акції →
           </Link>
         </div>
@@ -148,8 +153,10 @@ export default function HomePage() {
       {/* NEW */}
       <section className="mx-auto max-w-6xl px-4 py-6">
         <div className="flex items-baseline justify-between mb-5">
-          <h2 className="font-display text-3xl md:text-4xl">Нові надходження</h2>
-          <Link href="/new" className="text-sm text-brand-700 font-semibold hover:underline">
+          <h2 className="font-display text-3xl md:text-4xl text-cosmos-ink">
+            Нові <span className="cosmos-text">надходження</span>
+          </h2>
+          <Link href="/new" className="text-sm text-cosmos-aqua font-semibold hover:text-cosmos-fuchsia">
             Всі →
           </Link>
         </div>
@@ -160,19 +167,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* BENEFITS */}
+      {/* BENEFITS — cosmic glass cards */}
       <section className="mx-auto max-w-6xl px-4 py-12">
         <div className="grid md:grid-cols-3 gap-4">
           {[
-            { t: "100% оригінал", d: "Стокові речі з європейських магазинів. Бірки, якість." },
-            { t: "Доставка 1–2 дні", d: "Нова Пошта по всій Україні. Можлива післяплата." },
-            { t: "Зручна оплата", d: "На карту Приват/Моно або накладеним платежем." },
+            { t: "100% оригінал", d: "Стокові речі з європейських магазинів. Бірки, якість.", c: "text-cosmos-fuchsia" },
+            { t: "Доставка 1–2 дні", d: "Нова Пошта по всій Україні. Можлива післяплата.", c: "text-cosmos-aqua" },
+            { t: "Зручна оплата", d: "Онлайн-картка, Приват/Моно або накладеним платежем.", c: "text-cosmos-gold" },
           ].map((b) => (
-            <div key={b.t} className="relative overflow-hidden rounded-lg bg-neutral-900 text-white p-6">
-              <div className="absolute -right-4 -top-4 w-20 h-20 rounded-full bg-brand-600/30 blur-2xl" />
-              <div className="absolute -left-2 -bottom-2 w-16 h-16 rounded-full bg-sport-lime/20 blur-2xl" />
-              <div className="font-display text-2xl text-sport-lime">{b.t}</div>
-              <p className="mt-2 text-white/70 text-sm">{b.d}</p>
+            <div key={b.t} className="relative overflow-hidden rounded-xl cosmos-card p-6 shadow-cosmos">
+              <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-cosmos-purple/40 blur-3xl" />
+              <div className="absolute -left-4 -bottom-4 w-24 h-24 rounded-full bg-cosmos-cyan/30 blur-3xl" />
+              <div className={`font-display text-2xl ${b.c}`}>{b.t}</div>
+              <p className="mt-2 text-cosmos-mute text-sm">{b.d}</p>
             </div>
           ))}
         </div>

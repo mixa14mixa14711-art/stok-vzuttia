@@ -7,7 +7,7 @@ export function GeoBadge({ compact = false }: { compact?: boolean }) {
 
   if (geo.status === "granted" && geo.city) {
     return (
-      <span className="inline-flex items-center gap-1 text-xs text-sport-blue">
+      <span className="inline-flex items-center gap-1 text-xs text-cosmos-aqua">
         <Pin />
         <span className="hidden sm:inline">Доставляємо у</span>
         <b className="font-semibold">{geo.city}</b>
@@ -16,14 +16,14 @@ export function GeoBadge({ compact = false }: { compact?: boolean }) {
   }
 
   if (geo.status === "loading") {
-    return <span className="text-xs text-neutral-400">Визначаємо локацію…</span>;
+    return <span className="text-xs text-cosmos-mute">Визначаємо локацію…</span>;
   }
 
   return (
     <button
       type="button"
       onClick={geo.request}
-      className="inline-flex items-center gap-1 text-xs text-neutral-300 hover:text-sport-blue"
+      className="inline-flex items-center gap-1 text-xs text-cosmos-mute hover:text-cosmos-aqua"
       title="Визначити місто для доставки"
     >
       <Pin />

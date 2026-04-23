@@ -20,71 +20,160 @@ export default function Hero3D() {
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
     renderer.setSize(width, height);
-    renderer.setClearColor(0x0a0a0b, 1);
+    renderer.setClearColor(0x04051a, 1);
     mount.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x0a0a0b, 6, 14);
+    scene.fog = new THREE.FogExp2(0x0a0b2e, 0.07);
 
-    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 100);
-    camera.position.set(0, 0.4, 6);
+    const camera = new THREE.PerspectiveCamera(52, width / height, 0.1, 200);
+    camera.position.set(0, 0.6, 8);
 
-    // Lights
-    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-    const dir = new THREE.DirectionalLight(0xffffff, 1.6);
-    dir.position.set(5, 6, 5);
-    scene.add(dir);
-    const redP = new THREE.PointLight(0xff2d2d, 1.2, 12);
-    redP.position.set(4, 2, -2);
-    scene.add(redP);
-    const limeP = new THREE.PointLight(0xd4ff00, 1.2, 12);
-    limeP.position.set(-4, -2, -2);
-    scene.add(limeP);
+    // --- Lights: soft ambient + magenta + cyan key lights for a nebula-lit feel
+    scene.add(new THREE.AmbientLight(0x4b2c7a, 0.55));
+    const magenta = new THREE.PointLight(0xd946ef, 2.0, 40);
+    magenta.position.set(6, 3, -2);
+    scene.add(magenta);
+    const cyan = new THREE.PointLight(0x22d3ee, 1.6, 40);
+    cyan.position.set(-6, -2, -4);
+    scene.add(cyan);
+    const violet = new THREE.PointLight(0x7c3aed, 1.4, 40);
+    violet.position.set(0, 6, 4);
+    scene.add(violet);
 
-    // Core knot
-    const knot = new THREE.Mesh(
-      new THREE.TorusKnotGeometry(0.9, 0.32, 180, 28),
+    // --- STARFIELD: thousands of Points
+    const starGeo = new THREE.BufferGeometry();
+    const starCount = 1800;
+    const positions = new Float32Array(starCount * 3);
+    const colors = new Float32Array(starCount * 3);
+    const palette = [
+      new THREE.Color(0xffffff),
+      new THREE.Color(0xa855f7),
+      new THREE.Color(0x22d3ee),
+      new THREE.Color(0xec4899),
+      new THREE.Color(0xfbbf24),
+    ];
+    for (let i = 0; i < starCount; i++) {
+      const r = 25 + Math.random() * 40;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      positions[i * 3 + 2] = r * Math.cos(phi) - 10;
+      const c = palette[Math.floor(Math.random() * palette.length)];
+      colors[i * 3] = c.r;
+      colors[i * 3 + 1] = c.g;
+      colors[i * 3 + 2] = c.b;
+    }
+    starGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    starGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    const starMat = new THREE.PointsMaterial({
+      size: 0.18,
+      sizeAttenuation: true,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.95,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const stars = new THREE.Points(starGeo, starMat);
+    scene.add(stars);
+
+    // --- PLANET (central)
+    const planet = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(1.4, 4),
       new THREE.MeshStandardMaterial({
-        color: 0xff2d2d,
-        metalness: 0.8,
-        roughness: 0.2,
-        emissive: 0xff2d2d,
-        emissiveIntensity: 0.35,
+        color: 0x2a2d5e,
+        metalness: 0.3,
+        roughness: 0.55,
+        emissive: 0x4c1d95,
+        emissiveIntensity: 0.45,
       })
     );
-    scene.add(knot);
+    planet.position.set(0, 0.2, 0);
+    scene.add(planet);
 
-    // Orbit cluster
-    const orbits = new THREE.Group();
-    const colors = [0xff2d2d, 0xff6a1a, 0xd4ff00, 0x00e5ff, 0xffffff];
-    const cluster: { mesh: THREE.Mesh; seed: number; initialY: number }[] = [];
-    for (let i = 0; i < 14; i++) {
-      const r = 2.6 + (i % 3) * 0.25;
-      const a = (i / 14) * Math.PI * 2;
+    // Planet atmosphere glow (large transparent sphere)
+    const atmosphere = new THREE.Mesh(
+      new THREE.SphereGeometry(1.6, 48, 48),
+      new THREE.MeshBasicMaterial({
+        color: 0xa855f7,
+        transparent: true,
+        opacity: 0.12,
+        blending: THREE.AdditiveBlending,
+        side: THREE.BackSide,
+      })
+    );
+    atmosphere.position.copy(planet.position);
+    scene.add(atmosphere);
+
+    // --- RINGS (Saturn-like, tilted)
+    const ring1 = new THREE.Mesh(
+      new THREE.TorusGeometry(2.6, 0.04, 3, 160),
+      new THREE.MeshBasicMaterial({
+        color: 0xd946ef,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending,
+      })
+    );
+    ring1.rotation.x = Math.PI / 2.4;
+    ring1.position.copy(planet.position);
+    scene.add(ring1);
+
+    const ring2 = new THREE.Mesh(
+      new THREE.TorusGeometry(3.0, 0.03, 3, 160),
+      new THREE.MeshBasicMaterial({
+        color: 0x22d3ee,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending,
+      })
+    );
+    ring2.rotation.x = Math.PI / 2.4;
+    ring2.rotation.y = 0.2;
+    ring2.position.copy(planet.position);
+    scene.add(ring2);
+
+    // --- ORBITING SATELLITES (small glowing shapes)
+    const satellites = new THREE.Group();
+    const satMeta: { mesh: THREE.Mesh; radius: number; speed: number; phase: number; tiltY: number }[] = [];
+    const satColors = [0xa855f7, 0xd946ef, 0x22d3ee, 0xec4899, 0xfbbf24];
+    for (let i = 0; i < 10; i++) {
       const kind = i % 3;
       const geom =
         kind === 0
-          ? new THREE.BoxGeometry(1.1, 1.1, 1.1)
+          ? new THREE.OctahedronGeometry(0.22, 0)
           : kind === 1
-            ? new THREE.IcosahedronGeometry(0.8, 0)
-            : new THREE.TorusGeometry(0.6, 0.22, 16, 32);
-      const c = colors[i % colors.length];
+            ? new THREE.IcosahedronGeometry(0.2, 0)
+            : new THREE.TetrahedronGeometry(0.24, 0);
+      const c = satColors[i % satColors.length];
       const mat = new THREE.MeshStandardMaterial({
         color: c,
-        metalness: 0.4,
-        roughness: 0.3,
         emissive: c,
-        emissiveIntensity: c === 0xffffff ? 0 : 0.3,
+        emissiveIntensity: 0.9,
+        metalness: 0.6,
+        roughness: 0.2,
       });
       const mesh = new THREE.Mesh(geom, mat);
-      const scale = 0.22 + ((i * 7) % 10) / 30;
-      mesh.scale.setScalar(scale);
-      const initialY = ((i * 13) % 10) / 10 - 0.5;
-      mesh.position.set(Math.cos(a) * r, initialY, Math.sin(a) * r);
-      cluster.push({ mesh, seed: i, initialY });
-      orbits.add(mesh);
+      const radius = 3.6 + (i % 4) * 0.5;
+      satMeta.push({
+        mesh,
+        radius,
+        speed: 0.2 + (i % 4) * 0.08,
+        phase: (i / 10) * Math.PI * 2,
+        tiltY: ((i * 13) % 10) / 20 - 0.25,
+      });
+      satellites.add(mesh);
     }
-    scene.add(orbits);
+    scene.add(satellites);
+
+    // --- COMET / shooting particle (small trailing light)
+    const comet = new THREE.Mesh(
+      new THREE.SphereGeometry(0.08, 12, 12),
+      new THREE.MeshBasicMaterial({ color: 0xfbbf24 })
+    );
+    scene.add(comet);
 
     const clock = new THREE.Clock();
     let rafId = 0;
@@ -95,15 +184,33 @@ export default function Hero3D() {
       const dt = clock.getDelta();
       const t = clock.elapsedTime;
 
-      knot.rotation.x += dt * 0.2;
-      knot.rotation.y += dt * 0.35;
-      orbits.rotation.y += dt * 0.25;
+      // planet slow spin
+      planet.rotation.y += dt * 0.12;
+      planet.rotation.x += dt * 0.04;
 
-      for (const c of cluster) {
-        c.mesh.rotation.x = t * 0.6 + c.seed;
-        c.mesh.rotation.y = t * 0.9 + c.seed * 0.5;
-        c.mesh.position.y = c.initialY + Math.sin(t * 1.5 + c.seed) * 0.1;
+      // rings counter-rotate
+      ring1.rotation.z += dt * 0.25;
+      ring2.rotation.z -= dt * 0.18;
+
+      // starfield drift
+      stars.rotation.y += dt * 0.01;
+      stars.rotation.x += dt * 0.004;
+
+      // satellites orbit around planet with a tilted plane
+      for (const s of satMeta) {
+        const angle = s.phase + t * s.speed;
+        s.mesh.position.set(
+          Math.cos(angle) * s.radius,
+          s.tiltY + Math.sin(t * 1.2 + s.phase) * 0.15,
+          Math.sin(angle) * s.radius
+        );
+        s.mesh.rotation.x = t * 1.2 + s.phase;
+        s.mesh.rotation.y = t * 0.9 + s.phase;
       }
+
+      // comet loop (big elliptical path)
+      const ct = t * 0.4;
+      comet.position.set(Math.cos(ct) * 9, Math.sin(ct * 1.3) * 3.5, Math.sin(ct) * 9 - 3);
 
       renderer.render(scene, camera);
       rafId = requestAnimationFrame(tick);
@@ -126,11 +233,21 @@ export default function Hero3D() {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", onResize);
       renderer.dispose();
-      knot.geometry.dispose();
-      (knot.material as THREE.Material).dispose();
-      for (const c of cluster) {
-        c.mesh.geometry.dispose();
-        (c.mesh.material as THREE.Material).dispose();
+      planet.geometry.dispose();
+      (planet.material as THREE.Material).dispose();
+      atmosphere.geometry.dispose();
+      (atmosphere.material as THREE.Material).dispose();
+      ring1.geometry.dispose();
+      (ring1.material as THREE.Material).dispose();
+      ring2.geometry.dispose();
+      (ring2.material as THREE.Material).dispose();
+      starGeo.dispose();
+      starMat.dispose();
+      comet.geometry.dispose();
+      (comet.material as THREE.Material).dispose();
+      for (const s of satMeta) {
+        s.mesh.geometry.dispose();
+        (s.mesh.material as THREE.Material).dispose();
       }
       if (renderer.domElement.parentElement === mount) {
         mount.removeChild(renderer.domElement);

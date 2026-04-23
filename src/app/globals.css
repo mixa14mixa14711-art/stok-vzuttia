@@ -10,9 +10,59 @@
 html, body { height: 100%; }
 body {
   font-family: var(--font-sans);
-  color: #111;
-  background: #fafafa;
+  color: #eef0ff;
+  background: #04051a;
   -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+  position: relative;
+}
+
+/* Global cosmic backdrop — fixed starfield + nebula behind everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(1200px 700px at 10% -10%, rgba(168,85,247,0.28), transparent 60%),
+    radial-gradient(1000px 600px at 110% 0%, rgba(34,211,238,0.22), transparent 55%),
+    radial-gradient(900px 700px at 50% 110%, rgba(236,72,153,0.22), transparent 60%),
+    linear-gradient(180deg, #04051a 0%, #0a0b2e 45%, #1a0b3e 85%, #04051a 100%);
+  background-size: 200% 200%;
+  animation: nebula-shift 22s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes nebula-shift {
+  0%,100% { background-position: 0% 50%, 100% 0%, 50% 100%, 0% 0%; }
+  50%     { background-position: 100% 50%, 0% 100%, 50% 0%, 100% 100%; }
+}
+
+/* Twinkling stars — painted as CSS-only starfield */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.9), transparent 60%),
+    radial-gradient(1px 1px at 70px 110px, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(1.2px 1.2px at 150px 50px, rgba(255,255,255,0.95), transparent 60%),
+    radial-gradient(1px 1px at 220px 200px, rgba(255,255,255,0.6), transparent 60%),
+    radial-gradient(1.4px 1.4px at 330px 90px, rgba(255,255,255,1), transparent 60%),
+    radial-gradient(1px 1px at 80px 260px, rgba(255,255,255,0.75), transparent 60%),
+    radial-gradient(1px 1px at 290px 310px, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(1px 1px at 190px 370px, rgba(255,255,255,0.6), transparent 60%),
+    radial-gradient(1.2px 1.2px at 410px 180px, rgba(255,255,255,0.9), transparent 60%),
+    radial-gradient(1px 1px at 360px 40px, rgba(255,255,255,0.55), transparent 60%);
+  background-repeat: repeat;
+  background-size: 450px 450px;
+  animation: stars-twinkle 6s ease-in-out infinite;
+  opacity: 0.8;
+}
+@keyframes stars-twinkle {
+  0%,100% { opacity: 0.55; }
+  50%     { opacity: 0.95; }
 }
 
 h1, h2, h3, .font-display {
@@ -27,26 +77,104 @@ h1, h2, h3, .font-display {
   overflow: hidden;
 }
 
-/* Sport utilities */
-.sport-bg {
-  background: radial-gradient(1200px 600px at 20% -10%, rgba(255,45,45,0.18), transparent 60%),
-              radial-gradient(900px 500px at 110% 10%, rgba(212,255,0,0.10), transparent 60%),
-              #0a0a0b;
+/* --- Cosmic utilities (replaces previous sport utilities) --- */
+.sport-bg,
+.cosmos-bg {
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(168,85,247,0.28), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(34,211,238,0.20), transparent 60%),
+    radial-gradient(800px 600px at 50% 110%, rgba(236,72,153,0.22), transparent 60%),
+    linear-gradient(180deg, #04051a 0%, #0a0b2e 60%, #1a0b3e 100%);
 }
-.sport-grid {
+.sport-grid,
+.cosmos-grid {
   background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(rgba(168,85,247,0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34,211,238,0.10) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 .noise::after {
   content: "";
   position: absolute; inset: 0;
   pointer-events: none;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  opacity: 0.5;
+  opacity: 0.35;
   mix-blend-mode: overlay;
 }
 .clip-slant {
   clip-path: polygon(0 0, 100% 0, 96% 100%, 0 100%);
+}
+
+/* Glassmorphic card for cosmic surfaces */
+.cosmos-card {
+  background: linear-gradient(180deg, rgba(18,20,58,0.7), rgba(10,11,46,0.6));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(168,85,247,0.18);
+}
+.cosmos-card:hover {
+  border-color: rgba(168,85,247,0.45);
+  box-shadow: 0 0 40px -10px rgba(168,85,247,0.45);
+}
+
+/* Cosmic gradient text (hero accents) */
+.cosmos-text {
+  background: linear-gradient(90deg, #a855f7 0%, #d946ef 40%, #22d3ee 80%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* "cosmic button" primary */
+.btn-cosmos {
+  position: relative;
+  background: linear-gradient(90deg, #7c3aed 0%, #d946ef 100%);
+  color: #fff;
+  box-shadow: 0 0 35px -6px rgba(168,85,247,0.7);
+}
+.btn-cosmos:hover {
+  background: linear-gradient(90deg, #8b5cf6 0%, #e879f9 100%);
+  box-shadow: 0 0 55px -4px rgba(217,70,239,0.8);
+}
+
+/* Light-surface pages (product cards, forms on light bg) get a readable card */
+.light-card {
+  background: rgba(255,255,255,0.95);
+  color: #111;
+  border: 1px solid rgba(168,85,247,0.18);
+  box-shadow: 0 10px 30px -10px rgba(4,5,26,0.45);
+}
+
+/* --- Global readability on cosmic body: legacy text-neutral-* utilities
+   shipped with existing pages now need to render on a dark starfield.
+   These overrides keep prose readable without touching every page. --- */
+main :where(.text-neutral-500, .text-neutral-600, .text-neutral-700, .text-neutral-800, .text-neutral-900) {
+  color: #e7e9ff;
+}
+main :where(.text-neutral-400) {
+  color: #b6bbdb;
+}
+main :where(.bg-white, .bg-neutral-50, .bg-neutral-100) {
+  background-color: rgba(18, 20, 58, 0.65) !important;
+  color: #e7e9ff;
+  border-color: rgba(168, 85, 247, 0.2);
+}
+main :where(.border-neutral-100, .border-neutral-200, .border-neutral-300) {
+  border-color: rgba(168, 85, 247, 0.22) !important;
+}
+
+/* prose blocks used in /privacy & /offer — cosmic-friendly */
+main .prose {
+  --tw-prose-body: #d8dcf3;
+  --tw-prose-headings: #eef0ff;
+  --tw-prose-links: #22d3ee;
+  --tw-prose-bold: #f0eaff;
+  --tw-prose-quotes: #eef0ff;
+  --tw-prose-code: #fbbf24;
+  --tw-prose-hr: rgba(168,85,247,0.3);
+  color: #d8dcf3;
+}
+
+/* brand-red accent text kept vivid on dark bg */
+main :where(.text-brand-500, .text-brand-600, .text-brand-700) {
+  color: #ff6aa5;
 }

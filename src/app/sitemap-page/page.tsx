@@ -82,7 +82,7 @@ export default function SitemapPage() {
           {brands.map((b) => (
             <Link
               key={b}
-              href={`/brands/${encodeURIComponent(b.toLowerCase())}`}
+              href={`/brands/${encodeURIComponent(b)}`}
               className="inline-flex items-center rounded-full border border-neutral-300 bg-white px-3 py-1 text-sm hover:border-sport-blue hover:text-sport-blueDeep"
             >
               {b}
