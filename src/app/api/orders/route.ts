@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
@@ -57,6 +58,9 @@ export async function POST(req: Request) {
       },
     });
 
+    if (session?.userId) {
+      revalidatePath("/account");
+    }
     return NextResponse.json({ ok: true, orderId: order.id });
   } catch (e) {
     console.error(e);

@@ -54,6 +54,7 @@ export default function CheckoutPage() {
       }
       clear();
       router.push(`/checkout/success?order=${data.orderId}`);
+      router.refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Невідома помилка");
     } finally {
