@@ -80,20 +80,25 @@ export function Header({ user }: Props) {
               </div>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-5 text-sm font-semibold uppercase tracking-wide">
-              {DEPARTMENTS.map((d) => (
+            <nav className="hidden md:flex items-center gap-3 lg:gap-4 text-[13px] font-semibold uppercase tracking-wide">
+              {DEPARTMENTS.filter((d) => ["women", "men", "kids", "shoes"].includes(d.slug)).map((d) => (
+                <Link key={d.slug} href={`/catalog/${d.slug}`} className="hover:text-brand-600">
+                  {d.title}
+                </Link>
+              ))}
+              {DEPARTMENTS.filter((d) => ["accessories", "home", "sport", "mix"].includes(d.slug)).map((d) => (
                 <Link
                   key={d.slug}
                   href={`/catalog/${d.slug}`}
-                  className="hover:text-brand-600 transition-colors"
+                  className="hidden xl:inline hover:text-brand-600"
                 >
                   {d.title}
                 </Link>
               ))}
               <Link href="/brands" className="hover:text-brand-600">Бренди</Link>
               <Link href="/sale" className="text-brand-600 hover:text-brand-700">Акції</Link>
-              <Link href="/wholesale" className="hover:text-brand-600">Опт</Link>
-              <Link href="/size-guide" className="hover:text-brand-600">Розміри</Link>
+              <Link href="/wholesale" className="hidden lg:inline hover:text-brand-600">Опт</Link>
+              <Link href="/size-guide" className="hidden lg:inline hover:text-brand-600">Розміри</Link>
               <Link href="/contacts" className="hover:text-brand-600">Контакти</Link>
             </nav>
 
@@ -142,9 +147,13 @@ export function Header({ user }: Props) {
               ))}
               <Link href="/brands" onClick={() => setOpen(false)} className="py-1">Бренди</Link>
               <Link href="/sale" onClick={() => setOpen(false)} className="py-1 text-brand-600">Акції</Link>
+              <Link href="/new" onClick={() => setOpen(false)} className="py-1">Нові надходження</Link>
               <Link href="/wholesale" onClick={() => setOpen(false)} className="py-1">Опт</Link>
               <Link href="/size-guide" onClick={() => setOpen(false)} className="py-1">Таблиця розмірів</Link>
+              <Link href="/loyalty" onClick={() => setOpen(false)} className="py-1">Програма лояльності</Link>
+              <Link href="/reviews" onClick={() => setOpen(false)} className="py-1">Відгуки</Link>
               <Link href="/delivery" onClick={() => setOpen(false)} className="py-1">Доставка і оплата</Link>
+              <Link href="/returns" onClick={() => setOpen(false)} className="py-1">Обмін та повернення</Link>
               <Link href="/contacts" onClick={() => setOpen(false)} className="py-1">Контакти</Link>
               {!user && (
                 <div className="flex gap-3 pt-2 border-t border-neutral-100">

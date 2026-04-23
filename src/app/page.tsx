@@ -15,6 +15,9 @@ const DEPT_IMAGES: Record<string, string> = {
   men: "https://picsum.photos/seed/dept-men/600/700",
   kids: "https://picsum.photos/seed/dept-kids/600/700",
   shoes: "https://picsum.photos/seed/dept-shoes/600/700",
+  accessories: "https://picsum.photos/seed/dept-access/600/700",
+  home: "https://picsum.photos/seed/dept-home/600/700",
+  sport: "https://picsum.photos/seed/dept-sport/600/700",
   mix: "https://picsum.photos/seed/dept-mix/600/700",
 };
 
@@ -97,7 +100,7 @@ export default function HomePage() {
             Усі бренди →
           </Link>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-4">
           {DEPARTMENTS.map((d) => (
             <Link
               key={d.slug}

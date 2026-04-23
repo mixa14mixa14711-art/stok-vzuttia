@@ -17,9 +17,15 @@ export function Footer() {
           <div className="font-display text-lg text-sport-lime mb-3 uppercase tracking-widest">Покупцям</div>
           <ul className="space-y-1.5 text-sport-ink/80">
             <li><Link href="/delivery" className="hover:text-sport-lime">Доставка і оплата</Link></li>
+            <li><Link href="/returns" className="hover:text-sport-lime">Обмін та повернення</Link></li>
+            <li><Link href="/size-guide" className="hover:text-sport-lime">Таблиця розмірів</Link></li>
+            <li><Link href="/loyalty" className="hover:text-sport-lime">Програма лояльності</Link></li>
+            <li><Link href="/reviews" className="hover:text-sport-lime">Відгуки клієнтів</Link></li>
             <li><Link href="/about" className="hover:text-sport-lime">Про нас</Link></li>
-            <li><Link href="/contacts" className="hover:text-sport-lime">Контакти</Link></li>
             <li><Link href="/wholesale" className="hover:text-sport-lime">Опт / Великий гурт</Link></li>
+            <li><Link href="/offer" className="hover:text-sport-lime">Публічна оферта</Link></li>
+            <li><Link href="/privacy" className="hover:text-sport-lime">Політика конфіденційності</Link></li>
+            <li><Link href="/sitemap-page" className="hover:text-sport-lime">Мапа сайту</Link></li>
           </ul>
         </div>
         <div>
@@ -29,6 +35,9 @@ export function Footer() {
             <li><Link href="/catalog/men" className="hover:text-sport-lime">Чоловікам</Link></li>
             <li><Link href="/catalog/kids" className="hover:text-sport-lime">Дітям</Link></li>
             <li><Link href="/catalog/shoes" className="hover:text-sport-lime">Взуття</Link></li>
+            <li><Link href="/catalog/accessories" className="hover:text-sport-lime">Аксесуари</Link></li>
+            <li><Link href="/catalog/home" className="hover:text-sport-lime">Для дому</Link></li>
+            <li><Link href="/catalog/sport" className="hover:text-sport-lime">Спорт</Link></li>
             <li><Link href="/catalog/mix" className="hover:text-sport-lime">Мікс</Link></li>
             <li><Link href="/brands" className="hover:text-sport-lime">Бренди</Link></li>
             <li><Link href="/new" className="hover:text-sport-lime">Нові надходження</Link></li>

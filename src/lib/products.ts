@@ -5,9 +5,20 @@ export type Category =
   | "women-shoes"
   | "men-shoes"
   | "kids-shoes"
+  | "accessories"
+  | "home"
+  | "sport"
   | "mix";
 
-export type Department = "women" | "men" | "kids" | "shoes" | "mix";
+export type Department =
+  | "women"
+  | "men"
+  | "kids"
+  | "shoes"
+  | "accessories"
+  | "home"
+  | "sport"
+  | "mix";
 
 export type Product = {
   id: string;
@@ -30,6 +41,9 @@ export const CATEGORIES: Record<Category, { title: string; department: Departmen
   "women-shoes": { title: "Жіноче взуття", department: "shoes" },
   "men-shoes": { title: "Чоловіче взуття", department: "shoes" },
   "kids-shoes": { title: "Дитяче взуття", department: "shoes" },
+  "accessories": { title: "Аксесуари", department: "accessories" },
+  "home": { title: "Товари для дому", department: "home" },
+  "sport": { title: "Спорт та відпочинок", department: "sport" },
   "mix": { title: "Мікс", department: "mix" },
 };
 
@@ -42,6 +56,9 @@ export const DEPARTMENTS: {
   { slug: "men", title: "Чоловікам", categories: ["men-clothing", "men-shoes"] },
   { slug: "kids", title: "Дітям", categories: ["kids-clothing", "kids-shoes"] },
   { slug: "shoes", title: "Взуття", categories: ["women-shoes", "men-shoes", "kids-shoes"] },
+  { slug: "accessories", title: "Аксесуари", categories: ["accessories"] },
+  { slug: "home", title: "Для дому", categories: ["home"] },
+  { slug: "sport", title: "Спорт", categories: ["sport"] },
   { slug: "mix", title: "Мікс", categories: ["mix"] },
 ];
 
@@ -434,6 +451,249 @@ export const PRODUCTS: Product[] = [
       "Мікс-лот взуття (5 пар) Nike / Adidas / Puma. Оригінал, асортиментне сортування, сток з Європи.",
     images: [img("mx4a"), img("mx4b")],
     badge: "ЛОТ",
+  },
+
+  // ACCESSORIES
+  {
+    id: "a1",
+    slug: "sumka-mango-hobo",
+    title: "Сумка Mango Hobo",
+    brand: "Mango",
+    category: "accessories",
+    price: 890,
+    oldPrice: 1290,
+    sizes: ["One size"],
+    description:
+      "Жіноча сумка-hobo з екошкіри. Довгий регульований ремінь, внутрішня кишеня. Оригінал, сток з Іспанії.",
+    images: [img("a1a"), img("a1b")],
+    badge: "-30%",
+  },
+  {
+    id: "a2",
+    slug: "remin-zara-naturalna-shkira",
+    title: "Ремінь Zara (натуральна шкіра)",
+    brand: "Zara",
+    category: "accessories",
+    price: 390,
+    sizes: ["85", "90", "95", "100", "105"],
+    description: "Чоловічий ремінь зі 100% натуральної шкіри. Класична металева пряжка. Сток, оригінал Zara.",
+    images: [img("a2a"), img("a2b")],
+  },
+  {
+    id: "a3",
+    slug: "shapka-hm-merino",
+    title: "Шапка H&M Merino",
+    brand: "H&M",
+    category: "accessories",
+    price: 290,
+    sizes: ["One size"],
+    description: "Унісекс-шапка з 60% мериносової вовни. Подвійна вʼязка, теплий комірець-відворот.",
+    images: [img("a3a"), img("a3b")],
+  },
+  {
+    id: "a4",
+    slug: "sharf-reserved-wool",
+    title: "Шарф Reserved Wool",
+    brand: "Reserved",
+    category: "accessories",
+    price: 450,
+    oldPrice: 690,
+    sizes: ["One size"],
+    description: "Теплий вовняний шарф у клітинку. 180×28 см. Оригінал Reserved, сток з Польщі.",
+    images: [img("a4a"), img("a4b")],
+    badge: "SALE",
+  },
+  {
+    id: "a5",
+    slug: "rukavychky-next-leather",
+    title: "Рукавички Next Leather",
+    brand: "Next",
+    category: "accessories",
+    price: 520,
+    sizes: ["S", "M", "L"],
+    description: "Жіночі шкіряні рукавички з підкладкою. Сенсорні кінчики пальців. Оригінал Next.",
+    images: [img("a5a"), img("a5b")],
+  },
+  {
+    id: "a6",
+    slug: "okuljary-pullbear-aviator",
+    title: "Сонцезахисні окуляри Pull&Bear",
+    brand: "Pull&Bear",
+    category: "accessories",
+    price: 349,
+    sizes: ["One size"],
+    description: "Окуляри у стилі «авіатор», полікарбонат, UV400. Оригінал Pull&Bear, сток з Іспанії.",
+    images: [img("a6a"), img("a6b")],
+  },
+
+  // HOME — текстиль для дому
+  {
+    id: "h1",
+    slug: "postil-ikea-180x200",
+    title: "Постільна білизна IKEA 180×200",
+    brand: "IKEA",
+    category: "home",
+    price: 990,
+    oldPrice: 1390,
+    sizes: ["Двоспальний"],
+    description:
+      "Комплект постільної білизни IKEA: підодіяльник 180×200 + 2 наволочки 50×70. 100% бавовна-ранфорс. Сток з Німеччини.",
+    images: [img("h1a"), img("h1b")],
+    badge: "-28%",
+  },
+  {
+    id: "h2",
+    slug: "rushnyk-hm-home-banyi",
+    title: "Рушник H&M Home банний",
+    brand: "H&M Home",
+    category: "home",
+    price: 340,
+    sizes: ["70×140"],
+    description: "Махровий банний рушник H&M Home, 500 г/м². 100% бавовна. Оригінал, сток з Європи.",
+    images: [img("h2a"), img("h2b")],
+  },
+  {
+    id: "h3",
+    slug: "pled-zara-home-knit",
+    title: "Плед Zara Home Knit",
+    brand: "Zara Home",
+    category: "home",
+    price: 1290,
+    sizes: ["130×170"],
+    description: "Плед великої вʼязки Zara Home. Акрил + шерсть. Дуже теплий і легкий.",
+    images: [img("h3a"), img("h3b")],
+    badge: "HIT",
+  },
+  {
+    id: "h4",
+    slug: "postil-reserved-satin-200x220",
+    title: "Постільна білизна Reserved Satin 200×220",
+    brand: "Reserved Home",
+    category: "home",
+    price: 1490,
+    sizes: ["Євро"],
+    description:
+      "Комплект євро: підодіяльник 200×220 + 2 наволочки 70×70 + простирадло 240×260. Сатин, 100% бавовна.",
+    images: [img("h4a"), img("h4b")],
+  },
+  {
+    id: "h5",
+    slug: "kylym-hm-home-90x150",
+    title: "Килим H&M Home 90×150",
+    brand: "H&M Home",
+    category: "home",
+    price: 890,
+    sizes: ["90×150"],
+    description: "Декоративний килим короткого ворсу. Бавовна + поліестер. Антиковзке дно.",
+    images: [img("h5a"), img("h5b")],
+  },
+  {
+    id: "h6",
+    slug: "svichky-set-4",
+    title: "Набір ароматичних свічок (4 шт.)",
+    brand: "H&M Home",
+    category: "home",
+    price: 390,
+    sizes: ["Set"],
+    description: "Набір з 4 ароматичних свічок у скляних підсвічниках. Аромат: ваніль, цитрус, лаванда, кава.",
+    images: [img("h6a"), img("h6b")],
+  },
+
+  // SPORT — спортивний одяг/інвентар
+  {
+    id: "s1",
+    slug: "legginsy-nike-pro-w",
+    title: "Легінси Nike Pro (жін.)",
+    brand: "Nike",
+    category: "sport",
+    price: 890,
+    oldPrice: 1290,
+    sizes: ["XS", "S", "M", "L"],
+    description:
+      "Жіночі компресійні легінси Nike Pro Dri-FIT. Щільна фіксація, потовідведення. Оригінал, сток.",
+    images: [img("s1a"), img("s1b")],
+    badge: "SPORT",
+  },
+  {
+    id: "s2",
+    slug: "futbolka-adidas-climacool-m",
+    title: "Футболка Adidas Climacool",
+    brand: "Adidas",
+    category: "sport",
+    price: 590,
+    sizes: ["S", "M", "L", "XL"],
+    description: "Спортивна футболка Adidas з технологією Climacool. Швидко сохне. Оригінал, сток з Німеччини.",
+    images: [img("s2a"), img("s2b")],
+  },
+  {
+    id: "s3",
+    slug: "shorty-puma-training",
+    title: "Шорти Puma Training",
+    brand: "Puma",
+    category: "sport",
+    price: 490,
+    sizes: ["S", "M", "L", "XL"],
+    description: "Тренувальні шорти Puma з еластичним поясом. Вентиляційні вставки. Оригінал.",
+    images: [img("s3a"), img("s3b")],
+  },
+  {
+    id: "s4",
+    slug: "kofta-nike-therma-fit",
+    title: "Кофта Nike Therma-FIT",
+    brand: "Nike",
+    category: "sport",
+    price: 1190,
+    oldPrice: 1590,
+    sizes: ["S", "M", "L"],
+    description: "Тренувальна кофта Nike Therma-FIT. Зберігає тепло під час інтенсивних тренувань.",
+    images: [img("s4a"), img("s4b")],
+    badge: "-25%",
+  },
+  {
+    id: "s5",
+    slug: "ryukzak-adidas-linear-25l",
+    title: "Рюкзак Adidas Linear 25L",
+    brand: "Adidas",
+    category: "sport",
+    price: 690,
+    sizes: ["25L"],
+    description: "Спортивний рюкзак Adidas Linear. Відділення для ноутбука, два бокові сітчасті кармани.",
+    images: [img("s5a"), img("s5b")],
+  },
+  {
+    id: "s6",
+    slug: "shkarpetky-nike-3pack-sport",
+    title: "Шкарпетки Nike (3 пари)",
+    brand: "Nike",
+    category: "sport",
+    price: 290,
+    sizes: ["38-42", "42-46"],
+    description: "Набір з 3 пар спортивних шкарпеток Nike. Посилена пʼятка, сітчасті вставки.",
+    images: [img("s6a"), img("s6b")],
+  },
+  {
+    id: "s7",
+    slug: "mat-joga-5mm",
+    title: "Йога-килимок 5мм",
+    brand: "H&M Sport",
+    category: "sport",
+    price: 390,
+    oldPrice: 590,
+    sizes: ["183×61 см"],
+    description: "Йога-килимок 5 мм з TPE-піни. Нековзке покриття. У комплекті ремінь для переноски.",
+    images: [img("s7a"), img("s7b")],
+    badge: "SALE",
+  },
+  {
+    id: "s8",
+    slug: "termos-sport-500ml",
+    title: "Пляшка-термос 500 мл",
+    brand: "H&M Sport",
+    category: "sport",
+    price: 220,
+    sizes: ["500 мл"],
+    description: "Спортивна пляшка-термос із нержавіючої сталі. Тримає холод 24 год, тепло 12 год.",
+    images: [img("s8a"), img("s8b")],
   },
 ];
 
