@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Oswald", Impact, "Arial Narrow", sans-serif;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: var(--font-sans);
+  color: #ffffff;
+  background: #000000;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+  position: relative;
+}
+
+/* Global backdrop — pure black base with subtle red atmospheric glow */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(1200px 700px at 10% -10%, rgba(185,28,28,0.16), transparent 60%),
+    radial-gradient(1000px 600px at 110% 0%, rgba(185,28,28,0.08), transparent 55%),
+    radial-gradient(900px 700px at 50% 110%, rgba(255,255,255,0.05), transparent 60%),
+    linear-gradient(180deg, #000000 0%, #050505 45%, #0a0a0a 85%, #000000 100%);
+  background-size: 200% 200%;
+  animation: nebula-shift 22s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes nebula-shift {
+  0%,100% { background-position: 0% 50%, 100% 0%, 50% 100%, 0% 0%; }
+  50%     { background-position: 100% 50%, 0% 100%, 50% 0%, 100% 100%; }
+}
+
+/* Twinkling stars — painted as CSS-only starfield */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.9), transparent 60%),
+    radial-gradient(1px 1px at 70px 110px, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(1.2px 1.2px at 150px 50px, rgba(255,255,255,0.95), transparent 60%),
+    radial-gradient(1px 1px at 220px 200px, rgba(255,255,255,0.6), transparent 60%),
+    radial-gradient(1.4px 1.4px at 330px 90px, rgba(255,255,255,1), transparent 60%),
+    radial-gradient(1px 1px at 80px 260px, rgba(255,255,255,0.75), transparent 60%),
+    radial-gradient(1px 1px at 290px 310px, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(1px 1px at 190px 370px, rgba(255,255,255,0.6), transparent 60%),
+    radial-gradient(1.2px 1.2px at 410px 180px, rgba(255,255,255,0.9), transparent 60%),
+    radial-gradient(1px 1px at 360px 40px, rgba(255,255,255,0.55), transparent 60%);
+  background-repeat: repeat;
+  background-size: 450px 450px;
+  animation: stars-twinkle 6s ease-in-out infinite;
+  opacity: 0.8;
+}
+@keyframes stars-twinkle {
+  0%,100% { opacity: 0.55; }
+  50%     { opacity: 0.95; }
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- Cosmic utilities (replaces previous sport utilities) --- */
+.sport-bg,
+.cosmos-bg {
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(185,28,28,0.18), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(185,28,28,0.10), transparent 60%),
+    radial-gradient(800px 600px at 50% 110%, rgba(255,255,255,0.05), transparent 60%),
+    linear-gradient(180deg, #000000 0%, #050505 60%, #0a0a0a 100%);
+}
+.sport-grid,
+.cosmos-grid {
+  background-image:
+    linear-gradient(rgba(185,28,28,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.noise::after {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+}
+.clip-slant {
+  clip-path: polygon(0 0, 100% 0, 96% 100%, 0 100%);
+}
+
+/* Glassmorphic card — black surfaces with red accent borders */
+.cosmos-card {
+  background: linear-gradient(180deg, rgba(12,12,12,0.85), rgba(5,5,5,0.75));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(185,28,28,0.22);
+}
+.cosmos-card:hover {
+  border-color: rgba(185,28,28,0.6);
+  box-shadow: 0 0 40px -10px rgba(185,28,28,0.45);
+}
+
+/* Gradient text (hero accents) — pure white → red */
+.cosmos-text {
+  background: linear-gradient(90deg, #ffffff 0%, #ffbcbc 40%, #b91c1c 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Primary button — black with red border + red glow */
+.btn-cosmos {
+  position: relative;
+  background: linear-gradient(90deg, #0a0a0a 0%, #141414 100%);
+  color: #ffffff;
+  border: 1px solid rgba(185,28,28,0.6);
+  box-shadow: 0 0 32px -6px rgba(185,28,28,0.7);
+}
+.btn-cosmos:hover {
+  background: linear-gradient(90deg, #141414 0%, #1f1f1f 100%);
+  border-color: rgba(185,28,28,0.95);
+  box-shadow: 0 0 50px -4px rgba(185,28,28,0.85);
+}
+
+/* Light-surface pages (product cards, forms on light bg) get a readable card */
+.light-card {
+  background: rgba(255,255,255,0.95);
+  color: #111;
+  border: 1px solid rgba(185,28,28,0.2);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.55);
+}
+
+/* --- Global readability on black body: legacy text-neutral-* utilities
+   shipped with existing pages now need to render on a dark background.
+   Palette is strictly white + red. --- */
+main :where(.text-neutral-500, .text-neutral-600, .text-neutral-700, .text-neutral-800, .text-neutral-900) {
+  color: #ffffff;
+}
+main :where(.text-neutral-400) {
+  color: #e5e5e5;
+}
+main :where(.bg-white, .bg-neutral-50, .bg-neutral-100) {
+  background-color: rgba(10, 10, 10, 0.85) !important;
+  color: #ffffff;
+  border-color: rgba(185, 28, 28, 0.25);
+}
+main :where(.border-neutral-100, .border-neutral-200, .border-neutral-300) {
+  border-color: rgba(185, 28, 28, 0.25) !important;
+}
+
+/* prose blocks used in /privacy & /offer — white + red on black */
+main .prose {
+  --tw-prose-body: #ffffff;
+  --tw-prose-headings: #ffffff;
+  --tw-prose-links: #b91c1c;
+  --tw-prose-bold: #ffffff;
+  --tw-prose-quotes: #ffffff;
+  --tw-prose-code: #b91c1c;
+  --tw-prose-hr: rgba(185,28,28,0.35);
+  color: #ffffff;
+}
+
+/* brand-red accent text kept vivid on dark bg */
+main :where(.text-brand-500, .text-brand-600, .text-brand-700) {
+  color: #b91c1c;
+}
