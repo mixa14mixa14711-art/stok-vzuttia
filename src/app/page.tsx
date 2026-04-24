@@ -47,10 +47,6 @@ export default function HomePage() {
         </div>
         <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-28">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-cosmos-aqua mb-3">
-              <span className="w-8 h-px bg-cosmos-aqua" />
-              {SHOP_INFO.source}
-            </div>
             <h1 className="font-display font-extrabold tracking-tight">
               {/* ЄВРО — white fill, red stroke */}
               <span
