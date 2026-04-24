@@ -89,7 +89,7 @@ export default function Hero3D() {
     // Emblem root — all EU elements live here so we can scale responsively.
     // Shifted upward so the "ЄВРО МІКС" headline sits in the visual center of the emblem.
     const emblem = new THREE.Group();
-    emblem.position.y = 1.5;
+    emblem.position.y = 2.0;
     scene.add(emblem);
 
     const blueDisk = new THREE.Mesh(
