@@ -148,7 +148,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-6xl px-4 py-12">
         <div className="flex items-end justify-between mb-6">
           <h2 className="font-display text-3xl md:text-4xl text-cosmos-ink">
-            Галактика <span className="cosmos-text">відділів</span>
+            Каталог <span className="cosmos-text">по відділах</span>
           </h2>
           <Link href="/brands" className="text-sm text-cosmos-aqua font-semibold hover:text-cosmos-fuchsia">
             Усі бренди →

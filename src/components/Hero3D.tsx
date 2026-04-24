@@ -86,6 +86,10 @@ export default function Hero3D() {
     const EU_BLUE = 0x003399;
     const EU_GOLD = 0xfcd116;
 
+    // Emblem root — all EU elements live here so we can scale responsively.
+    const emblem = new THREE.Group();
+    scene.add(emblem);
+
     const blueDisk = new THREE.Mesh(
       new THREE.CircleGeometry(3.6, 96),
       new THREE.MeshBasicMaterial({
@@ -95,7 +99,7 @@ export default function Hero3D() {
       })
     );
     blueDisk.position.z = -0.4;
-    scene.add(blueDisk);
+    emblem.add(blueDisk);
 
     // Outer vignette for the disk
     const blueHalo = new THREE.Mesh(
@@ -109,7 +113,7 @@ export default function Hero3D() {
       })
     );
     blueHalo.position.z = -0.35;
-    scene.add(blueHalo);
+    emblem.add(blueHalo);
 
     // Faint gold ring where the 12 stars sit (guide line, subtle)
     const guideRing = new THREE.Mesh(
@@ -122,7 +126,7 @@ export default function Hero3D() {
       })
     );
     guideRing.position.z = -0.1;
-    scene.add(guideRing);
+    emblem.add(guideRing);
 
     // --- Build 5-pointed star geometry (flat, extruded slightly for depth)
     const makeStarShape = (outerR: number, innerR: number) => {
@@ -187,7 +191,7 @@ export default function Hero3D() {
         baseAngle: (i / 12) * Math.PI * 2,
       });
     }
-    scene.add(ring);
+    emblem.add(ring);
 
     // --- Secondary twinkling gold particles drifting across the blue disk
     const twinkleCount = 60;
@@ -213,7 +217,26 @@ export default function Hero3D() {
       depthWrite: false,
     });
     const twinkles = new THREE.Points(twinkleGeo, twinkleMat);
-    scene.add(twinkles);
+    emblem.add(twinkles);
+
+    // Responsive emblem scale — shrink on narrow viewports so it never
+    // overflows the hero container on mobile.
+    const applyResponsiveScale = () => {
+      const aspect = width / Math.max(1, height);
+      // Under ~520px wide: strongly scale down.
+      // Between 520–900px: moderately.
+      // Desktop: full size.
+      let s = 1;
+      if (width < 380) s = 0.52;
+      else if (width < 520) s = 0.62;
+      else if (width < 720) s = 0.75;
+      else if (width < 960) s = 0.88;
+      // If container is very tall relative to width (portrait), clamp further.
+      if (aspect < 0.8) s = Math.min(s, 0.7);
+      if (aspect < 0.6) s = Math.min(s, 0.55);
+      emblem.scale.setScalar(s);
+    };
+    applyResponsiveScale();
 
     const clock = new THREE.Clock();
     let rafId = 0;
@@ -280,6 +303,7 @@ export default function Hero3D() {
       renderer.setSize(width, height);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      applyResponsiveScale();
     };
     window.addEventListener("resize", onResize);
 
