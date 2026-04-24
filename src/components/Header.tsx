@@ -81,16 +81,33 @@ export function Header({ user }: Props) {
               </Link>
             </nav>
 
-            {/* Right side: phone + contact pills + account + cart */}
+            {/* Right side: TikTok icon + phone + account + cart */}
             <div className="flex items-center gap-2 md:gap-2.5">
               <a
-                href={`tel:${SHOP_INFO.phoneDigits}`}
-                className="inline-flex items-center gap-1.5 text-[13px] sm:text-sm md:text-[15px] font-bold tracking-wide text-[#ff2d2d] hover:text-[#ff5757] transition-colors"
-                aria-label={`Телефонувати ${SHOP_INFO.phone}`}
+                href={SHOP_INFO.tiktokUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`TikTok ${SHOP_INFO.tiktok}`}
+                className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-cosmos-aqua/60 text-cosmos-aqua hover:bg-cosmos-aqua hover:text-cosmos-void transition-colors"
               >
                 <svg
                   width="16"
                   height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden
+                >
+                  <path d="M19.5 7.8c-1.8 0-3.3-1.4-3.3-3.2V4h-3.1v12.4c0 1.2-1 2.2-2.2 2.2a2.2 2.2 0 1 1 0-4.4c.2 0 .4 0 .6.1V11a5.3 5.3 0 1 0 4.7 5.3V9.6c1 .7 2.2 1.1 3.5 1.1V7.8h-.2z" />
+                </svg>
+              </a>
+              <a
+                href={`tel:${SHOP_INFO.phoneDigits}`}
+                className="inline-flex items-center gap-1.5 text-[19px] sm:text-[21px] md:text-[22px] font-bold tracking-wide text-[#ff2d2d] hover:text-[#ff5757] transition-colors"
+                aria-label={`Телефонувати ${SHOP_INFO.phone}`}
+              >
+                <svg
+                  width="24"
+                  height="24"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                   aria-hidden
@@ -99,23 +116,6 @@ export function Header({ user }: Props) {
                   <path d="M6.6 10.8c1.5 2.9 3.9 5.3 6.8 6.8l2.3-2.3c.3-.3.7-.4 1.1-.3 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1.1L6.6 10.8z" />
                 </svg>
                 <span className="whitespace-nowrap">{SHOP_INFO.phone}</span>
-              </a>
-              <a
-                href={SHOP_INFO.tiktokUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`TikTok ${SHOP_INFO.tiktok}`}
-                className="hidden md:inline-flex items-center justify-center w-8 h-8 rounded-full border border-cosmos-aqua/60 text-cosmos-aqua hover:bg-cosmos-aqua hover:text-cosmos-void transition-colors"
-              >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden
-                >
-                  <path d="M19.5 7.8c-1.8 0-3.3-1.4-3.3-3.2V4h-3.1v12.4c0 1.2-1 2.2-2.2 2.2a2.2 2.2 0 1 1 0-4.4c.2 0 .4 0 .6.1V11a5.3 5.3 0 1 0 4.7 5.3V9.6c1 .7 2.2 1.1 3.5 1.1V7.8h-.2z" />
-                </svg>
               </a>
 
               {user ? (
