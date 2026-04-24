@@ -51,12 +51,6 @@ export default function HomePage() {
               <span className="w-8 h-px bg-cosmos-aqua" />
               {SHOP_INFO.source}
             </div>
-            <div className="inline-flex items-center gap-2 mb-4 rounded-full border border-sport-lime/60 bg-sport-lime/10 px-3 py-1 text-[11px] uppercase tracking-[0.25em] text-sport-lime shadow-[0_0_28px_-4px_rgba(212,255,0,0.55)]">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />
-              </svg>
-              Speed · Style · Stock
-            </div>
             <h1 className="font-display font-extrabold tracking-tight">
               {/* ЄВРО — white fill, red stroke */}
               <span

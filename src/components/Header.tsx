@@ -101,21 +101,6 @@ export function Header({ user }: Props) {
                 <span className="hidden md:inline">{SHOP_INFO.phone}</span>
               </a>
               <a
-                href={`viber://chat?number=${SHOP_INFO.viber}`}
-                aria-label="Viber"
-                className="hidden md:inline-flex items-center justify-center w-8 h-8 rounded-full border border-cosmos-purple/60 text-cosmos-fuchsia hover:bg-cosmos-purple hover:text-white transition-colors"
-              >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden
-                >
-                  <path d="M18.8 3c1.2 0 2.2 1 2.2 2.2v9.3c0 1.2-1 2.2-2.2 2.2h-3.1l-3.9 3.2V16.7H5.2C4 16.7 3 15.7 3 14.5V5.2C3 4 4 3 5.2 3h13.6zm-6.6 3.7c-2.5 0-4.4 1.7-4.5 4 0 .2.1.3.3.3h.6c.2 0 .3-.1.3-.3.1-1.6 1.5-2.7 3.3-2.7s3.2 1.1 3.3 2.7c0 .2.1.3.3.3h.6c.2 0 .3-.1.3-.3-.1-2.3-2-4-4.5-4zm0 1.8c-1.5 0-2.6 1-2.7 2.4 0 .2.1.3.3.3h.6c.2 0 .3-.1.3-.2.1-.9.7-1.5 1.5-1.5s1.4.6 1.5 1.5c0 .1.1.2.3.2h.6c.2 0 .3-.1.3-.3-.1-1.4-1.2-2.4-2.7-2.4zm-5.2 2.1c-.3 0-.5.2-.5.5v.2c.3 3.3 2.8 5.7 6.1 6h.2c.2 0 .4-.2.4-.5v-.9c0-.3-.2-.5-.5-.6-.3 0-.7-.1-1-.2-.2 0-.4 0-.5.2l-.6.6c-.9-.5-1.7-1.2-2.2-2.2l.6-.6c.1-.1.2-.3.2-.5-.1-.3-.2-.7-.2-1-.1-.3-.3-.5-.6-.5h-.4z" />
-                </svg>
-              </a>
-              <a
                 href={SHOP_INFO.tiktokUrl}
                 target="_blank"
                 rel="noopener noreferrer"
