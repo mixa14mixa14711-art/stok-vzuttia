@@ -9,7 +9,7 @@ export const metadata = {
 const TIERS = [
   { name: "Start", color: "from-neutral-200 to-neutral-100", accent: "text-neutral-700", from: 0, discount: 0 },
   { name: "Silver", color: "from-sport-blue/30 to-sport-blue/10", accent: "text-sport-blueDeep", from: 3000, discount: 3 },
-  { name: "Gold", color: "from-amber-200 to-yellow-100", accent: "text-amber-600", from: 8000, discount: 7 },
+  { name: "Gold", color: "from-amber-200 to-yellow-100", accent: "text-brand-500", from: 8000, discount: 7 },
   { name: "Platinum", color: "from-rose-200 to-red-100", accent: "text-sport-red", from: 20000, discount: 12 },
 ];
 
