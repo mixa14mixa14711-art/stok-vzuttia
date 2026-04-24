@@ -46,7 +46,7 @@ export default function HomePage() {
           </ErrorBoundary>
         </div>
         <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-28">
-          <div className="max-w-xl">
+          <div className="max-w-2xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-cosmos-aqua mb-3">
               <span className="w-8 h-px bg-cosmos-aqua" />
               {SHOP_INFO.source}
@@ -84,7 +84,7 @@ export default function HomePage() {
                 МІКС
               </span>
               <span
-                className="block my-3 h-[3px] w-32 bg-brand-500"
+                className="block mx-auto my-3 h-[3px] w-32 bg-brand-500"
                 style={{ boxShadow: "0 0 18px #ff2d2d" }}
                 aria-hidden
               />
@@ -99,17 +99,17 @@ export default function HomePage() {
                 аксесуари з Европи
               </span>
               <span
-                className="block mt-3 h-[3px] w-32 bg-brand-500"
+                className="block mx-auto mt-3 h-[3px] w-32 bg-brand-500"
                 style={{ boxShadow: "0 0 18px #ff2d2d" }}
                 aria-hidden
               />
             </h1>
-            <p className="mt-5 text-cosmos-mute max-w-md">
+            <p className="mt-5 text-cosmos-mute max-w-md mx-auto">
               Оригінальні бренди — Zara, H&M, Reserved, Bershka, Nike, Adidas. Жіночий,
               чоловічий, дитячий одяг та взуття + мікс-лоти оптом. Доставка Новою Поштою
               по всій Україні.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
                 href="/new"
                 className="btn-cosmos font-bold uppercase tracking-wide px-6 py-3 rounded-full animate-cosmicPulse"
