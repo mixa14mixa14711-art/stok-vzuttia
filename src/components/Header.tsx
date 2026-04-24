@@ -85,7 +85,7 @@ export function Header({ user }: Props) {
             <div className="flex items-center gap-2 md:gap-2.5">
               <a
                 href={`tel:${SHOP_INFO.phoneDigits}`}
-                className="hidden sm:inline-flex items-center gap-1.5 text-sm md:text-[15px] font-bold tracking-wide text-[#ff2d2d] hover:text-[#ff5757] transition-colors"
+                className="inline-flex items-center gap-1.5 text-[13px] sm:text-sm md:text-[15px] font-bold tracking-wide text-[#ff2d2d] hover:text-[#ff5757] transition-colors"
                 aria-label={`Телефонувати ${SHOP_INFO.phone}`}
               >
                 <svg
@@ -98,7 +98,7 @@ export function Header({ user }: Props) {
                 >
                   <path d="M6.6 10.8c1.5 2.9 3.9 5.3 6.8 6.8l2.3-2.3c.3-.3.7-.4 1.1-.3 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1.1L6.6 10.8z" />
                 </svg>
-                <span className="hidden md:inline">{SHOP_INFO.phone}</span>
+                <span className="whitespace-nowrap">{SHOP_INFO.phone}</span>
               </a>
               <a
                 href={SHOP_INFO.tiktokUrl}
