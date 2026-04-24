@@ -26,7 +26,7 @@ export function VideosSection() {
           href={SHOP_INFO.tiktokUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cosmos-fuchsia via-cosmos-pink to-sport-red text-white px-5 py-2.5 font-bold uppercase tracking-wide text-sm shadow-[0_0_40px_-5px_rgba(255,45,45,0.55)] hover:scale-[1.03] transition"
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cosmos-fuchsia via-cosmos-pink to-sport-red text-white px-5 py-2.5 font-bold uppercase tracking-wide text-sm shadow-[0_0_40px_-5px_rgba(185,28,28,0.55)] hover:scale-[1.03] transition"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
             <path d="M19.5 7.8c-1.8 0-3.3-1.4-3.3-3.2V4h-3.1v12.4c0 1.2-1 2.2-2.2 2.2a2.2 2.2 0 1 1 0-4.4c.2 0 .4 0 .6.1V11a5.3 5.3 0 1 0 4.7 5.3V9.6c1 .7 2.2 1.1 3.5 1.1V7.8h-.2z" />

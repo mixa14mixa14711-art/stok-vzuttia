@@ -52,10 +52,10 @@ export default function HomePage() {
               <span
                 className="block text-6xl sm:text-7xl md:text-8xl leading-[0.9] text-white"
                 style={{
-                  WebkitTextStroke: "2px #ff2d2d",
+                  WebkitTextStroke: "2px #b91c1c",
                   paintOrder: "stroke fill",
                   textShadow:
-                    "0 0 24px rgba(255,45,45,0.45), 0 2px 0 rgba(0,0,0,0.45)",
+                    "0 0 24px rgba(185,28,28,0.45), 0 2px 0 rgba(0,0,0,0.45)",
                 }}
               >
                 ЄВРО
@@ -64,18 +64,18 @@ export default function HomePage() {
               <span
                 className="block text-6xl sm:text-7xl md:text-8xl leading-[0.9] mt-1"
                 style={{
-                  color: "#ff2d2d",
+                  color: "#b91c1c",
                   WebkitTextStroke: "2px #ffffff",
                   paintOrder: "stroke fill",
                   textShadow:
-                    "0 0 28px rgba(255,45,45,0.7), 0 2px 0 rgba(0,0,0,0.5)",
+                    "0 0 28px rgba(185,28,28,0.7), 0 2px 0 rgba(0,0,0,0.5)",
                 }}
               >
                 МІКС
               </span>
               <span
                 className="block mx-auto my-3 h-[3px] w-32 bg-brand-500"
-                style={{ boxShadow: "0 0 18px #ff2d2d" }}
+                style={{ boxShadow: "0 0 18px #b91c1c" }}
                 aria-hidden
               />
               <span
@@ -90,7 +90,7 @@ export default function HomePage() {
               </span>
               <span
                 className="block mx-auto mt-3 h-[3px] w-32 bg-brand-500"
-                style={{ boxShadow: "0 0 18px #ff2d2d" }}
+                style={{ boxShadow: "0 0 18px #b91c1c" }}
                 aria-hidden
               />
             </h1>
