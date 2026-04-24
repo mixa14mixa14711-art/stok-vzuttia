@@ -62,7 +62,12 @@ export const DEPARTMENTS: {
   { slug: "mix", title: "Мікс", categories: ["mix"] },
 ];
 
-const img = (id: string) => `https://picsum.photos/seed/${id}/800/1000`;
+// Category-matched photos from Flickr (public, tag-filtered).
+// `tags` is a comma-separated list of English tags; `lock` guarantees the
+// same image for the same product, but two different products with the same
+// tags will share the image — so use a unique lock per product.
+const img = (tags: string, lock: number) =>
+  `https://loremflickr.com/800/1000/${tags}?lock=${lock}`;
 
 export const PRODUCTS: Product[] = [
   // WOMEN CLOTHING
@@ -77,7 +82,7 @@ export const PRODUCTS: Product[] = [
     sizes: ["XS", "S", "M", "L"],
     description:
       "Класичний приталений жакет Zara з нової колекції. Стоковий, оригінал з Європи. Підкладка, дві внутрішні кишені.",
-    images: [img("w1a"), img("w1b")],
+    images: [img("blazer,jacket,fashion", 101), img("blazer,woman,fashion", 102)],
     badge: "-40%",
   },
   {
@@ -89,7 +94,7 @@ export const PRODUCTS: Product[] = [
     price: 650,
     sizes: ["S", "M", "L"],
     description: "Легка сукня-міді з натуральної віскози. Оригінал H&M, сток з Німеччини.",
-    images: [img("w2a"), img("w2b")],
+    images: [img("dress,midi,fashion", 103), img("dress,summer,fashion", 104)],
   },
   {
     id: "w3",
@@ -101,7 +106,7 @@ export const PRODUCTS: Product[] = [
     oldPrice: 2990,
     sizes: ["S", "M", "L"],
     description: "Осіннє пальто кольору camel. Оригінал Reserved, сток із Польщі. Вовна 30%.",
-    images: [img("w3a"), img("w3b")],
+    images: [img("coat,camel,overcoat", 105), img("coat,winter,woman", 106)],
     badge: "HIT",
   },
   {
@@ -113,7 +118,7 @@ export const PRODUCTS: Product[] = [
     price: 720,
     sizes: ["26", "27", "28", "29", "30"],
     description: "Жіночі джинси Mango slim fit, висока посадка. Оригінал, сток з Іспанії.",
-    images: [img("w4a"), img("w4b")],
+    images: [img("jeans,denim,woman", 107), img("jeans,denim,slimfit", 108)],
   },
 
   // MEN CLOTHING
@@ -126,7 +131,7 @@ export const PRODUCTS: Product[] = [
     price: 1490,
     sizes: ["M", "L", "XL", "XXL"],
     description: "Чоловіча куртка-бомбер Next. Оригінал, сток з Великої Британії. Демісезон.",
-    images: [img("m1a"), img("m1b")],
+    images: [img("bomber,jacket,menswear", 109), img("bomberjacket,men", 110)],
   },
   {
     id: "m2",
@@ -138,7 +143,7 @@ export const PRODUCTS: Product[] = [
     oldPrice: 450,
     sizes: ["S", "M", "L", "XL"],
     description: "Класична базова футболка 100% бавовна. Оригінал H&M, сток із Німеччини.",
-    images: [img("m2a"), img("m2b")],
+    images: [img("tshirt,basic,men", 111), img("tshirt,cotton,plain", 112)],
     badge: "SALE",
   },
   {
@@ -150,7 +155,7 @@ export const PRODUCTS: Product[] = [
     price: 690,
     sizes: ["S", "M", "L", "XL"],
     description: "Сорочка Zara Oxford regular fit, оригінал, сток з Іспанії.",
-    images: [img("m3a"), img("m3b")],
+    images: [img("oxfordshirt,men", 113), img("buttonshirt,men", 114)],
   },
   {
     id: "m4",
@@ -161,7 +166,7 @@ export const PRODUCTS: Product[] = [
     price: 490,
     sizes: ["M", "L", "XL"],
     description: "Теплий светр крупної в’язки. Оригінал Primark, сток із Ірландії.",
-    images: [img("m4a"), img("m4b")],
+    images: [img("sweater,knit,men", 115), img("sweater,wool,men", 116)],
   },
 
   // KIDS CLOTHING
@@ -174,7 +179,7 @@ export const PRODUCTS: Product[] = [
     price: 590,
     sizes: ["74", "80", "86", "92", "98"],
     description: "Дитячий комплект Next: боді + штани + кофтинка. Оригінал, сток з UK.",
-    images: [img("k1a"), img("k1b")],
+    images: [img("babyclothes,infant,outfit", 117), img("babyclothes,boy,girl", 118)],
   },
   {
     id: "k2",
@@ -185,7 +190,7 @@ export const PRODUCTS: Product[] = [
     price: 490,
     sizes: ["104", "110", "116", "122"],
     description: "Дитяча сукня Zara Kids з бавовни. Оригінал, сток з Іспанії.",
-    images: [img("k2a"), img("k2b")],
+    images: [img("girldress,kids,fashion", 119), img("childrensdress", 120)],
   },
   {
     id: "k3",
@@ -197,7 +202,7 @@ export const PRODUCTS: Product[] = [
     oldPrice: 1890,
     sizes: ["98", "104", "110", "116"],
     description: "Зимовий пуховик Lindex, водовідштовхувальна тканина. Оригінал, сток зі Швеції.",
-    images: [img("k3a"), img("k3b")],
+    images: [img("kidswinterjacket,puffer", 121), img("kidsjacket,snow", 122)],
     badge: "ЗИМА",
   },
   {
@@ -209,7 +214,7 @@ export const PRODUCTS: Product[] = [
     price: 390,
     sizes: ["104", "110", "116", "122", "128"],
     description: "Класичні дитячі джинси H&M, еластичний пояс. Оригінал, сток з ЄС.",
-    images: [img("k4a"), img("k4b")],
+    images: [img("kidsjeans,denim", 123), img("kidsjeans,boy", 124)],
   },
 
   // WOMEN SHOES
@@ -223,7 +228,7 @@ export const PRODUCTS: Product[] = [
     oldPrice: 3290,
     sizes: ["36", "37", "38", "39", "40"],
     description: "Оригінальні жіночі кросівки Nike Air Max. Сток з Німеччини.",
-    images: [img("ws1a"), img("ws1b")],
+    images: [img("sneakers,airmax,nike", 125), img("sneakers,running,woman", 126)],
     badge: "ORIGINAL",
   },
   {
@@ -235,7 +240,7 @@ export const PRODUCTS: Product[] = [
     price: 3290,
     sizes: ["36", "37", "38", "39"],
     description: "Класичні жовті черевики Timberland. Оригінал, сток із США/ЄС.",
-    images: [img("ws2a"), img("ws2b")],
+    images: [img("boots,timberland,leather", 127), img("boots,hiking,yellow", 128)],
   },
   {
     id: "ws3",
@@ -246,7 +251,7 @@ export const PRODUCTS: Product[] = [
     price: 990,
     sizes: ["36", "37", "38", "39", "40"],
     description: "Елегантні човники Tamaris. Оригінал, сток з Німеччини.",
-    images: [img("ws3a"), img("ws3b")],
+    images: [img("balletflats,shoes,woman", 129), img("ballerinashoes", 130)],
   },
 
   // MEN SHOES
@@ -259,7 +264,7 @@ export const PRODUCTS: Product[] = [
     price: 2790,
     sizes: ["40", "41", "42", "43", "44", "45"],
     description: "Легендарні Adidas Samba. Оригінал, сток з Німеччини.",
-    images: [img("ms1a"), img("ms1b")],
+    images: [img("sneakers,adidas,samba", 131), img("sneakers,retro,men", 132)],
     badge: "HIT",
   },
   {
@@ -271,7 +276,7 @@ export const PRODUCTS: Product[] = [
     price: 2990,
     sizes: ["41", "42", "43", "44"],
     description: "Шкіряні черевики Ecco. Оригінал, сток з Данії.",
-    images: [img("ms2a"), img("ms2b")],
+    images: [img("leathershoes,men,oxford", 133), img("dressshoes,leather", 134)],
   },
   {
     id: "ms3",
@@ -283,7 +288,7 @@ export const PRODUCTS: Product[] = [
     oldPrice: 2590,
     sizes: ["41", "42", "43", "44", "45"],
     description: "Чоловічі кросівки Puma RS-X. Оригінал, сток з ЄС.",
-    images: [img("ms3a"), img("ms3b")],
+    images: [img("sneakers,puma,men", 135), img("runningshoes,men", 136)],
   },
 
   // KIDS SHOES
@@ -296,7 +301,7 @@ export const PRODUCTS: Product[] = [
     price: 1290,
     sizes: ["28", "29", "30", "31", "32", "33"],
     description: "Дитячі кросівки Nike, оригінал. Сток із Німеччини.",
-    images: [img("ks1a"), img("ks1b")],
+    images: [img("kidssneakers,nike", 137), img("kidsshoes,sport", 138)],
   },
   {
     id: "ks2",
@@ -307,7 +312,7 @@ export const PRODUCTS: Product[] = [
     price: 1490,
     sizes: ["27", "28", "29", "30", "31"],
     description: "Дитячі черевики Geox «дихаюча» підошва. Оригінал, сток з Італії.",
-    images: [img("ks2a"), img("ks2b")],
+    images: [img("kidsshoes,geox", 139), img("kidsboots,leather", 140)],
   },
   {
     id: "ks3",
@@ -319,7 +324,7 @@ export const PRODUCTS: Product[] = [
     oldPrice: 1390,
     sizes: ["30", "31", "32", "33", "34"],
     description: "Дитячі кеди Puma, легка підошва. Оригінал, сток з ЄС.",
-    images: [img("ks3a"), img("ks3b")],
+    images: [img("kidssneakers,puma", 141), img("kidsshoes,kids", 142)],
     badge: "-30%",
   },
 
@@ -333,7 +338,7 @@ export const PRODUCTS: Product[] = [
     price: 590,
     sizes: ["S", "M", "L"],
     description: "Тепла в'язка, крупна текстура. Оригінал Bershka, сток з Іспанії.",
-    images: [img("w5a"), img("w5b")],
+    images: [img("sweater,knit,oversize", 143), img("pullover,knitwear,woman", 144)],
   },
   {
     id: "w6",
@@ -345,7 +350,7 @@ export const PRODUCTS: Product[] = [
     oldPrice: 590,
     sizes: ["XS", "S", "M"],
     description: "Укорочений топ Pull&Bear 100% бавовна. Оригінал, сток з Іспанії.",
-    images: [img("w6a"), img("w6b")],
+    images: [img("croptop,tshirt,woman", 145), img("croptop,fashion", 146)],
     badge: "SALE",
   },
   {
@@ -357,7 +362,7 @@ export const PRODUCTS: Product[] = [
     price: 520,
     sizes: ["XS", "S", "M", "L"],
     description: "Сатинова блуза Stradivarius, оригінал. Сток з Іспанії.",
-    images: [img("w7a"), img("w7b")],
+    images: [img("blouse,satin,silk", 147), img("blouse,woman,fashion", 148)],
   },
 
   // MEN CLOTHING — extra brands
@@ -370,7 +375,7 @@ export const PRODUCTS: Product[] = [
     price: 790,
     sizes: ["S", "M", "L", "XL"],
     description: "Льняна сорочка Jack&Jones, регуляр крій. Оригінал, сток із ЄС.",
-    images: [img("m5a"), img("m5b")],
+    images: [img("linenshirt,men,summer", 149), img("shirt,linen,men", 150)],
   },
   {
     id: "m6",
@@ -382,7 +387,7 @@ export const PRODUCTS: Product[] = [
     oldPrice: 2190,
     sizes: ["M", "L", "XL"],
     description: "Класичне поло Lacoste, піке. Оригінал, сток з Франції.",
-    images: [img("m6a"), img("m6b")],
+    images: [img("poloshirt,men,classic", 151), img("poloshirt,cotton", 152)],
     badge: "-30%",
   },
 
@@ -396,7 +401,7 @@ export const PRODUCTS: Product[] = [
     price: 290,
     sizes: ["92", "98", "104", "110", "116"],
     description: "Яскрава дитяча футболка Boboli Kids 100% бавовна. Оригінал, сток з Іспанії.",
-    images: [img("k5a"), img("k5b")],
+    images: [img("kidstshirt,toddler", 153), img("kidstshirt,print", 154)],
   },
 
   // MIX (gурт/мікс-лоти)
@@ -410,7 +415,7 @@ export const PRODUCTS: Product[] = [
     sizes: ["Лот"],
     description:
       "Мікс-лот жіночого одягу (10 одиниць) від Zara, Bershka, H&M, Mango, Stradivarius тощо. Оригінал, сток з Європи.",
-    images: [img("mx1a"), img("mx1b")],
+    images: [img("womensclothing,wardrobe", 155), img("womenswear,rack,fashion", 156)],
     badge: "ЛОТ",
   },
   {
@@ -423,7 +428,7 @@ export const PRODUCTS: Product[] = [
     sizes: ["Лот"],
     description:
       "Мікс-лот чоловічого одягу (10 одиниць) від Jack&Jones, Zara, H&M, Tom Tailor, Gant. Оригінал, сток з Європи.",
-    images: [img("mx2a"), img("mx2b")],
+    images: [img("menswear,wardrobe,rack", 157), img("menswear,fashion,shop", 158)],
     badge: "ЛОТ",
   },
   {
@@ -436,7 +441,7 @@ export const PRODUCTS: Product[] = [
     sizes: ["Лот"],
     description:
       "Мікс-лот дитячого одягу (10 одиниць) від H&M, Zara Kids, Boboli, Next, Lindex. Оригінал, сток з Європи.",
-    images: [img("mx3a"), img("mx3b")],
+    images: [img("kidsclothes,wardrobe", 159), img("childrenclothes,family", 160)],
     badge: "ЛОТ",
   },
   {
@@ -449,7 +454,7 @@ export const PRODUCTS: Product[] = [
     sizes: ["Лот"],
     description:
       "Мікс-лот взуття (5 пар) Nike / Adidas / Puma. Оригінал, асортиментне сортування, сток з Європи.",
-    images: [img("mx4a"), img("mx4b")],
+    images: [img("sneakers,collection,shoes", 161), img("sneakers,shoes,sport", 162)],
     badge: "ЛОТ",
   },
 
@@ -465,7 +470,7 @@ export const PRODUCTS: Product[] = [
     sizes: ["One size"],
     description:
       "Жіноча сумка-hobo з екошкіри. Довгий регульований ремінь, внутрішня кишеня. Оригінал, сток з Іспанії.",
-    images: [img("a1a"), img("a1b")],
+    images: [img("handbag,purse,woman", 163), img("handbag,leather,fashion", 164)],
     badge: "-30%",
   },
   {
@@ -477,7 +482,7 @@ export const PRODUCTS: Product[] = [
     price: 390,
     sizes: ["85", "90", "95", "100", "105"],
     description: "Чоловічий ремінь зі 100% натуральної шкіри. Класична металева пряжка. Сток, оригінал Zara.",
-    images: [img("a2a"), img("a2b")],
+    images: [img("leatherbelt,belt,men", 165), img("belt,buckle,leather", 166)],
   },
   {
     id: "a3",
@@ -488,7 +493,7 @@ export const PRODUCTS: Product[] = [
     price: 290,
     sizes: ["One size"],
     description: "Унісекс-шапка з 60% мериносової вовни. Подвійна вʼязка, теплий комірець-відворот.",
-    images: [img("a3a"), img("a3b")],
+    images: [img("beanie,woolhat,winter", 167), img("knitbeanie,hat", 168)],
   },
   {
     id: "a4",
@@ -500,7 +505,7 @@ export const PRODUCTS: Product[] = [
     oldPrice: 690,
     sizes: ["One size"],
     description: "Теплий вовняний шарф у клітинку. 180×28 см. Оригінал Reserved, сток з Польщі.",
-    images: [img("a4a"), img("a4b")],
+    images: [img("scarf,wool,plaid", 169), img("scarf,winter,knit", 170)],
     badge: "SALE",
   },
   {
@@ -512,7 +517,7 @@ export const PRODUCTS: Product[] = [
     price: 520,
     sizes: ["S", "M", "L"],
     description: "Жіночі шкіряні рукавички з підкладкою. Сенсорні кінчики пальців. Оригінал Next.",
-    images: [img("a5a"), img("a5b")],
+    images: [img("gloves,leather,woman", 171), img("gloves,winter", 172)],
   },
   {
     id: "a6",
@@ -523,7 +528,7 @@ export const PRODUCTS: Product[] = [
     price: 349,
     sizes: ["One size"],
     description: "Окуляри у стилі «авіатор», полікарбонат, UV400. Оригінал Pull&Bear, сток з Іспанії.",
-    images: [img("a6a"), img("a6b")],
+    images: [img("sunglasses,aviator", 173), img("sunglasses,fashion", 174)],
   },
 
   // HOME — текстиль для дому
@@ -538,7 +543,7 @@ export const PRODUCTS: Product[] = [
     sizes: ["Двоспальний"],
     description:
       "Комплект постільної білизни IKEA: підодіяльник 180×200 + 2 наволочки 50×70. 100% бавовна-ранфорс. Сток з Німеччини.",
-    images: [img("h1a"), img("h1b")],
+    images: [img("bedding,bedsheets,bedroom", 175), img("bedlinen,pillows", 176)],
     badge: "-28%",
   },
   {
@@ -550,7 +555,7 @@ export const PRODUCTS: Product[] = [
     price: 340,
     sizes: ["70×140"],
     description: "Махровий банний рушник H&M Home, 500 г/м². 100% бавовна. Оригінал, сток з Європи.",
-    images: [img("h2a"), img("h2b")],
+    images: [img("towel,bathroom,bath", 177), img("towel,spa", 178)],
   },
   {
     id: "h3",
@@ -561,7 +566,7 @@ export const PRODUCTS: Product[] = [
     price: 1290,
     sizes: ["130×170"],
     description: "Плед великої вʼязки Zara Home. Акрил + шерсть. Дуже теплий і легкий.",
-    images: [img("h3a"), img("h3b")],
+    images: [img("blanket,knit,throw", 179), img("chunkyknit,blanket", 180)],
     badge: "HIT",
   },
   {
@@ -574,7 +579,7 @@ export const PRODUCTS: Product[] = [
     sizes: ["Євро"],
     description:
       "Комплект євро: підодіяльник 200×220 + 2 наволочки 70×70 + простирадло 240×260. Сатин, 100% бавовна.",
-    images: [img("h4a"), img("h4b")],
+    images: [img("bedlinen,satin,bedroom", 181), img("bedding,luxury,bed", 182)],
   },
   {
     id: "h5",
@@ -585,7 +590,7 @@ export const PRODUCTS: Product[] = [
     price: 890,
     sizes: ["90×150"],
     description: "Декоративний килим короткого ворсу. Бавовна + поліестер. Антиковзке дно.",
-    images: [img("h5a"), img("h5b")],
+    images: [img("rug,carpet,interior", 183), img("rug,floor,modern", 184)],
   },
   {
     id: "h6",
@@ -596,7 +601,7 @@ export const PRODUCTS: Product[] = [
     price: 390,
     sizes: ["Set"],
     description: "Набір з 4 ароматичних свічок у скляних підсвічниках. Аромат: ваніль, цитрус, лаванда, кава.",
-    images: [img("h6a"), img("h6b")],
+    images: [img("candle,aromatic,home", 185), img("candle,scented,decor", 186)],
   },
 
   // SPORT — спортивний одяг/інвентар
@@ -611,7 +616,7 @@ export const PRODUCTS: Product[] = [
     sizes: ["XS", "S", "M", "L"],
     description:
       "Жіночі компресійні легінси Nike Pro Dri-FIT. Щільна фіксація, потовідведення. Оригінал, сток.",
-    images: [img("s1a"), img("s1b")],
+    images: [img("leggings,fitness,woman", 187), img("sportswear,woman,gym", 188)],
     badge: "SPORT",
   },
   {
@@ -623,7 +628,7 @@ export const PRODUCTS: Product[] = [
     price: 590,
     sizes: ["S", "M", "L", "XL"],
     description: "Спортивна футболка Adidas з технологією Climacool. Швидко сохне. Оригінал, сток з Німеччини.",
-    images: [img("s2a"), img("s2b")],
+    images: [img("sporttshirt,running,men", 189), img("athletic,tshirt,men", 190)],
   },
   {
     id: "s3",
@@ -634,7 +639,7 @@ export const PRODUCTS: Product[] = [
     price: 490,
     sizes: ["S", "M", "L", "XL"],
     description: "Тренувальні шорти Puma з еластичним поясом. Вентиляційні вставки. Оригінал.",
-    images: [img("s3a"), img("s3b")],
+    images: [img("sportshorts,training", 191), img("shorts,athletic,men", 192)],
   },
   {
     id: "s4",
@@ -646,7 +651,7 @@ export const PRODUCTS: Product[] = [
     oldPrice: 1590,
     sizes: ["S", "M", "L"],
     description: "Тренувальна кофта Nike Therma-FIT. Зберігає тепло під час інтенсивних тренувань.",
-    images: [img("s4a"), img("s4b")],
+    images: [img("hoodie,sport,men", 193), img("trainingjacket,sport", 194)],
     badge: "-25%",
   },
   {
@@ -658,7 +663,7 @@ export const PRODUCTS: Product[] = [
     price: 690,
     sizes: ["25L"],
     description: "Спортивний рюкзак Adidas Linear. Відділення для ноутбука, два бокові сітчасті кармани.",
-    images: [img("s5a"), img("s5b")],
+    images: [img("backpack,sport,black", 195), img("backpack,gym,bag", 196)],
   },
   {
     id: "s6",
@@ -669,7 +674,7 @@ export const PRODUCTS: Product[] = [
     price: 290,
     sizes: ["38-42", "42-46"],
     description: "Набір з 3 пар спортивних шкарпеток Nike. Посилена пʼятка, сітчасті вставки.",
-    images: [img("s6a"), img("s6b")],
+    images: [img("sportsocks,athletic", 197), img("socks,running,pair", 198)],
   },
   {
     id: "s7",
@@ -681,7 +686,7 @@ export const PRODUCTS: Product[] = [
     oldPrice: 590,
     sizes: ["183×61 см"],
     description: "Йога-килимок 5 мм з TPE-піни. Нековзке покриття. У комплекті ремінь для переноски.",
-    images: [img("s7a"), img("s7b")],
+    images: [img("yogamat,yoga,exercise", 199), img("yoga,mat,fitness", 200)],
     badge: "SALE",
   },
   {
@@ -693,7 +698,7 @@ export const PRODUCTS: Product[] = [
     price: 220,
     sizes: ["500 мл"],
     description: "Спортивна пляшка-термос із нержавіючої сталі. Тримає холод 24 год, тепло 12 год.",
-    images: [img("s8a"), img("s8b")],
+    images: [img("waterbottle,sport,stainless", 201), img("thermos,bottle,gym", 202)],
   },
 ];
 
